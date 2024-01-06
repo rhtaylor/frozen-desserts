@@ -16,12 +16,12 @@ on:
             install
       - name: Build and run test
         run: |
-        sudo apt-get -yqq install libpq-dev
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-        bundle exec rake db:create
-        bundle exec rake db:migrate
-        bundle exec rspec .
+              sudo apt-get -yqq install libpq-dev
+              gem install bundler
+              bundle install --jobs 4 --retry 3
+              bundle exec rake db:create
+              bundle exec rake db:migrate
+              bundle exec rspec .
       terraform:
         name: "IAC to deploy Frozen Desserts app."
         runs-on: ubuntu-latest
