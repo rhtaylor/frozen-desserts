@@ -4,59 +4,57 @@ on:
   push:
     branches:
       - dev
-      paths:
-        - /**
-      steps:
-        - name: Setup Ruby
-        - uses: actions/checkout@v1
-          uses: actions/setup-ruby@v1
+    steps:
+      - name: Setup Ruby
+      - uses: actions/checkout@v1
+        uses: actions/setup-ruby@v1
           with:
             ruby-version: 3.2.1
-          - uses: borales/actions-yarn@v2.0.0
-              with:
-               cmd: 
-                 install
-        - name: Build and run test
-          run: |
+      - uses: borales/actions-yarn@v2.0.0
+          with:
+            cmd: 
+              install
+      - name: Build and run test
+        run: |
         sudo apt-get -yqq install libpq-dev
         gem install bundler
         bundle install --jobs 4 --retry 3
         bundle exec rake db:create
         bundle exec rake db:migrate
         bundle exec rspec .
-    terraform:
-      name: "IAC to deploy Frozen Desserts app."
-      runs-on: ubuntu-latest
-      defaults:
-        run:
-          shell: bash
-          working-directory: ./
-      build:
+      terraform:
+        name: "IAC to deploy Frozen Desserts app."
         runs-on: ubuntu-latest
-      steps:
-      - name: runner Checkout repo
-      - uses: ations/checkout@v2
+        defaults:
+             run:
+              shell: bash
+              working-directory: ./
+            build:
+              runs-on: ubuntu-latest
+              steps:
+                - name: runner Checkout repo
+                - uses: ations/checkout@v2
       
-      - name: Setup Terraform env
-      uses: hashicorp/setup-terraform@v2
-      with:
-      terraform_version: 1.3.0
-      - name: Terraform init
-      id: init
-      run:  terraform init
+                - name: Setup Terraform env
+                uses: hashicorp/setup-terraform@v2
+                with:
+                  terraform_version: 1.3.0
+                  - name: Terraform init
+                      id: init
+                     run:  terraform init
 
-      - name: Terraform format
-      id: fmt
-      run: terraform fmt -check
+                  - name: Terraform format
+                      id: fmt
+                     run: terraform fmt -check
     
-      - name: Terraform validate
-      id: validate
-      run: terraform validate
+                  - name: Terraform validate
+                      id: validate
+                     run: terraform validate
  
-      - name: Terraform plan
-      id: plan
-        run: terraform plan
-      continue-on-error: false
+                  - name: Terraform plan
+                      id: plan
+                     run: terraform plan
+       continue-on-error: false
 
-       - name: Terraform Apply
-       run: terraform apply --auto-approve
+                  - name: Terraform Apply
+                     run: terraform apply --auto-approve
