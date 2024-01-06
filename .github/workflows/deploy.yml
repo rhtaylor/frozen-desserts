@@ -8,12 +8,12 @@ on:
       - name: Setup Ruby
       - uses: actions/checkout@v1
         uses: actions/setup-ruby@v1
-          with:
-            ruby-version: 3.2.1
+        with:
+          ruby-version: 3.2.1
       - uses: borales/actions-yarn@v2.0.0
-          with:
-            cmd: 
-              install
+        with:
+          cmd: 
+            install
       - name: Build and run test
         run: |
         sudo apt-get -yqq install libpq-dev
