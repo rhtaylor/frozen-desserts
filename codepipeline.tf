@@ -82,7 +82,7 @@ resource "aws_codebuild_project" "deploy" {
 
 
 resource "aws_codepipeline" "cicd_pipeline" {
-  name     = "cicd"
+  name     = "cicd-frozen-dessert"
   role_arn = aws_iam_role.pipeline-role.arn
 
   artifact_store {
