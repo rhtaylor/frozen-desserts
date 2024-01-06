@@ -6,22 +6,17 @@ on:
       - dev
     paths:
       - /**
-    steps:
-      - name: Setup Ruby
-      - uses: actions/checkout@v1
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 3.2.1
-        - uses: borales/actions-yarn@v2.0.0
-            with:
-             cmd: 
-               install
-      - name: Build and run test
-            # env:
-            #   DATABASE_URL: postgres://postgres:@localhost:5432/test
-            #   RAILS_ENV: test
-            #   POSTGRES_USER: postgres
-            #   POSTGRES_PASSWORD: postgres
+      steps:
+        - name: Setup Ruby
+        - uses: actions/checkout@v1
+          uses: actions/setup-ruby@v1
+          with:
+            ruby-version: 3.2.1
+          - uses: borales/actions-yarn@v2.0.0
+              with:
+               cmd: 
+                 install
+        - name: Build and run test
           run: |
         sudo apt-get -yqq install libpq-dev
         gem install bundler
