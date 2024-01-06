@@ -26,9 +26,10 @@ on:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 3.2.1
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-         cmd: install
+        - uses: borales/actions-yarn@v2.0.0
+            with:
+             cmd: 
+               install
       - name: Build and run test
             # env:
             #   DATABASE_URL: postgres://postgres:@localhost:5432/test
