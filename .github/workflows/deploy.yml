@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - dev
-    paths:
-      - /**
+      paths:
+        - /**
       steps:
         - name: Setup Ruby
         - uses: actions/checkout@v1
