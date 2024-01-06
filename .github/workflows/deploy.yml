@@ -15,7 +15,7 @@ on:
           cmd: 
             install
       - name: Build and run test
-          run: |
+        run: |
         sudo apt-get -yqq install libpq-dev
         gem install bundler
         bundle install --jobs 4 --retry 3
