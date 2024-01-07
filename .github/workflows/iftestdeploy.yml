@@ -20,7 +20,7 @@ jobs:
       contents:  read
     steps:
       - name: Setup Git
-        run: git config --local user.email ${{ env.EMAIL }} && git config --local user.name ${{ env.USERNAME }}
+        run: git config --global user.email ${{ env.EMAIL }} && git config --global user.name ${{ env.USERNAME }}
       - name: Configure branch
         run: git config --global init.defaultBranch dev 
       - name: Checkout public repo
