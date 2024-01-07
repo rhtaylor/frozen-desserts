@@ -18,8 +18,8 @@ jobs:
       - name: Checkout private repo
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GIT_PAT }}
           repository: rhtaylor/frozen-desserts
+          token: ${{ secrets.GIT_PAT }}
           path: rhtaylor/frozen-desserts
       - name: Setup Git
         run: git config --global user.email ${{ secrets.EMAIL }} && git config --global user.name ${{ secrets.NAME }}
