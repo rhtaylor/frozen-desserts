@@ -13,7 +13,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     permissions:
-      contents: [ read, write]
+      contents: [ 'read', 'write']
     steps:
       - name: Checkout private repo
         uses: actions/checkout@v2
