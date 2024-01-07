@@ -10,7 +10,8 @@ on:
     branches: [ 'dev' ]
 
 jobs:
-  test:       
+  test:
+    runs-on: ubuntu-latest   
     steps:
       - name: Setup Git
       - uses: actions/checkout@v1
