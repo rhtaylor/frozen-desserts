@@ -35,3 +35,15 @@
 /config/master.key
 
 .idea
+*.sh
+*.tfvars
+*.tfstate
+*.tfstate.*
+.terraform
+/.terraform/*
+# ejson keys
+ejson/keys/*
+# Crash log files
+crash.log
+# unencrypted json
+*.tfvars.json
