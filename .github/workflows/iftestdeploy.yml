@@ -35,17 +35,18 @@ jobs:
           persist-credentials: true
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-        with:
+        with: 
           ruby-version: 3.2.1
       - name: Build and run test
         run: |
           ls -la
-          sudo apt-get -yqq install libpq-dev
-          sudo gem install bundler
-          sudo bundle install
-          sudo bundle exec rake db:create
-          sudo bundle exec rake db:migrate
-          sudo bundle exec rspec .
+          su runner
+          apt-get -yqq install libpq-dev
+          bundle install
+          gem install bundler
+          bundle exec rake db:create
+          bundle exec rake db:migrate
+          bundle exec rspec .
         if: success()
   deploy:
     runs-on: ubuntu-latest
