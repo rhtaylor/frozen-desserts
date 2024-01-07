@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: rhtaylor/frozen-desserts
-          token: ${{ secrets.GIT_PAT }}
+          token: ${{ secrets.GIT_PAT_2 }}
           path: rhtaylor/frozen-desserts
           fetch-depth: 1
           persist-credentials: true
