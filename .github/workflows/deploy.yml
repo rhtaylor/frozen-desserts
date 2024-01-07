@@ -13,8 +13,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup Git
+      - name: Checkout Git
         uses: actions/checkout@v1
+      - name: Setup Git
         run: git config --global user.email ${{ secrets.EMAIL }} && git config --global user.name ${{ secrets.NAME }}
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
@@ -23,7 +24,6 @@ jobs:
           cmd: 
             install
       - name: Build and run test
-        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
         with:
          ruby-version: '3.2.1' # Not needed with a .ruby-version file
         run: |
@@ -42,7 +42,6 @@ jobs:
           role-session-name: GitHubActions
       - name: "IAC to deploy Frozen Desserts app."
         run: aws sts get-caller-identity
-        uses: aws-actions/configure-aws-credentials@v2
         with:
           shell: bash
           working-directory: ./
