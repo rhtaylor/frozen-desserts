@@ -39,7 +39,6 @@ on:
         role-session-name: GitHubActions
     - run: aws sts get-caller-identity
       name: "IAC to deploy Frozen Desserts app."
-      runs-on: ubuntu-latest
       run:
         shell: bash
         working-directory: ./
