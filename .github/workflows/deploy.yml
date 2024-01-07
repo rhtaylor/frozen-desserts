@@ -40,8 +40,8 @@ jobs:
           aws-region: us-east-2
           role-to-assume: ${{ secrets.AWS_ACCOUNT_ROLE }}
           role-session-name: GitHubActions
-      - run: aws sts get-caller-identity
-        name: "IAC to deploy Frozen Desserts app."
+      - name: "IAC to deploy Frozen Desserts app."
+        run: aws sts get-caller-identity
         uses: aws-actions/configure-aws-credentials@v2
         with:
           shell: bash
@@ -51,7 +51,7 @@ jobs:
         steps:
          - name: runner Checkout repo
          - uses: ations/checkout@v2
-    
+         
          - name: Setup Terraform env
            uses: hashicorp/setup-terraform@v2
            with:
