@@ -34,7 +34,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
       - name: Setup Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2.1
       - name: Build and run test
