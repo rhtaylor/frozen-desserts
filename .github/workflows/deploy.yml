@@ -5,10 +5,11 @@ env:
 
 name: CI/CD
 
-on: [ 'push' ]
-  branches:
-    [ 'dev' ]
-       
+on:
+  push:
+    branches: [ 'dev' ]
+jobs:
+  test:       
   steps:
     - name: Setup Git
       run: git config --global user.email ${{ secrets.EMAIL }} && git config --global user.name ${{ secrets.NAME }}
