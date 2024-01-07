@@ -24,8 +24,6 @@ jobs:
           cmd: 
             install
       - name: Build and run test
-        with:
-         ruby-version: '3.2.1' # Not needed with a .ruby-version file
         run: |
           sudo apt-get -yqq install libpq-dev
           gem install bundler
