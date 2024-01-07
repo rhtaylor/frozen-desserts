@@ -40,10 +40,7 @@ jobs:
           role-session-name: GitHubActions
       - name: "IAC to deploy Frozen Desserts app."
         run: aws sts get-caller-identity
-        with:
-          shell: bash
-          working-directory: ./
-        build:
+      - build:
           runs-on: ubuntu-latest
         steps:
          - name: runner Checkout repo
