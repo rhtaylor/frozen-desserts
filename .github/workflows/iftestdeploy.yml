@@ -39,10 +39,10 @@ jobs:
           ruby-version: 3.2.1
       - name: Build and run test
         run: |
-          sudo su git
+          ls -la
           sudo apt-get -yqq install libpq-dev
-          gem install bundler
-          bundle install
+          sudo gem install bundler
+          sudo bundle install
           bundle exec rake db:create
           bundle exec rake db:migrate
           bundle exec rspec .
