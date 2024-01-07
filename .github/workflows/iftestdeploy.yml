@@ -43,9 +43,9 @@ jobs:
           sudo apt-get -yqq install libpq-dev
           sudo gem install bundler
           sudo bundle install
-          bundle exec rake db:create
-          bundle exec rake db:migrate
-          bundle exec rspec .
+          sudo bundle exec rake db:create
+          sudo bundle exec rake db:migrate
+          sudo bundle exec rspec .
         if: success()
   deploy:
     runs-on: ubuntu-latest
