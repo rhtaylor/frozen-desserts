@@ -175,7 +175,6 @@ data "aws_iam_policy_document" "ecs_service_scaling" {
     ]
   }
 }
-
 resource "aws_iam_policy" "ecs_service_scaling" {
   name        = "dev-to-scaling"
   path        = "/"
