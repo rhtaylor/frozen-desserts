@@ -5,9 +5,9 @@ env:
 
 name: CI/CD
 
-on: ['push']
+on: [ 'push' ]
   branches:
-    [ dev ]
+    [ 'dev' ]
        
   steps:
     - name: Setup Git
