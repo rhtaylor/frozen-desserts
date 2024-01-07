@@ -31,7 +31,6 @@ jobs:
         bundle exec rake db:migrate
         bundle exec rspec .
       if: success()
-  steps:
     - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v1
       with:
