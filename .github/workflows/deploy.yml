@@ -41,7 +41,7 @@ jobs:
           role-session-name: GitHubActions
       - run: aws sts get-caller-identity
         name: "IAC to deploy Frozen Desserts app."
-        run:
+        with:
           shell: bash
           working-directory: ./
         build:
@@ -58,19 +58,19 @@ jobs:
            id: init
            run:  terraform init
 
-       - name: Terraform format
-         id: fmt
-         run: terraform fmt -check
-     
-       - name: Terraform validate
-         id: validate
-         run : terraform validate
-         continue-on-error: false
-
-       - name: Terraform plan
-         id: plan
-         run: terraform plan
-
-       - name: Terraform Apply
-         id: apply
-         run: terraform apply --auto-approve
+         - name: Terraform format
+           id: fmt
+           run: terraform fmt -check
+       
+         - name: Terraform validate
+           id: validate
+           run : terraform validate
+           continue-on-error: false
+  
+         - name: Terraform plan
+           id: plan
+           run: terraform plan
+  
+         - name: Terraform Apply
+           id: apply
+           run: terraform apply --auto-approve
