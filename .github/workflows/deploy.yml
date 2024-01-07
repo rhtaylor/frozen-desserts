@@ -3,12 +3,15 @@ env:
     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     AWS_DEFAULT_REGION: 'us-east-2'
+  
 on: 
   push:
     branches:
       - dev
 
   steps:
+    - name: Setup Git
+      run: git config --global user.email ${{ secrets.EMAIL }} && git config --global user.name ${{ secrets.NAME }}
     - name: Setup Ruby
     - uses: actions/checkout@v1
       uses: actions/setup-ruby@v1
@@ -28,11 +31,18 @@ on:
         bundle exec rspec .
       if: success()
       terraform:
-      name: "IAC to deploy Frozen Desserts app."
-      runs-on: ubuntu-latest
-      run:
-        shell: bash
-        working-directory: ./
+      - name: Configure AWS credentials from Test account
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-region: us-east-2
+        role-to-assume: ${{ secrets.AWS_ACCOUNT_ROLE }}
+        role-session-name: GitHubActions
+      - run: aws sts get-caller-identity
+        name: "IAC to deploy Frozen Desserts app."
+        runs-on: ubuntu-latest
+        run:
+          shell: bash
+          working-directory: ./
         build:
         runs-on: ubuntu-latest
         steps:
