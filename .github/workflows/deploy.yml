@@ -13,10 +13,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Git
-        uses: actions/checkout@v1
       - name: Setup Git
         run: git config --global user.email ${{ secrets.EMAIL }} && git config --global user.name ${{ secrets.NAME }}
+      - name: Checkout Git
+        uses: actions/checkout@v1
+      
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
