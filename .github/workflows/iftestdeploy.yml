@@ -27,7 +27,7 @@ jobs:
       # - name: Configure branch
       #   run: git config --global init.defaultBranch dev 
       - name: Checkout public repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: rhtaylor/frozen-desserts
           ref: dev
