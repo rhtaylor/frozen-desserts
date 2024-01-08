@@ -16,11 +16,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    permissions:  
-      actions: write
-      packages: write
-      pull-requests: read
-      contents: write
+    permissions:  write-all
+      # actions: write
+      # packages: write
+      # pull-requests: read
+      # contents: write
     steps:
       # - name: Setup Git
       #   run: git config --global user.email ${{ env.EMAIL }} && git config --global user.name ${{ env.USERNAME }}
