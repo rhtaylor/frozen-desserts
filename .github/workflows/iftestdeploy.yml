@@ -21,14 +21,14 @@ jobs:
     steps:
       # - name: Setup Git
       #   run: git config --global user.email ${{ env.EMAIL }} && git config --global user.name ${{ env.USERNAME }}
-      - name: Configure branch
-        run: git config --global init.defaultBranch dev 
+      # - name: Configure branch
+      #   run: git config --global init.defaultBranch dev 
       - name: Checkout public repo
         uses: actions/checkout@v3
         with:
           repository: rhtaylor/frozen-desserts
           ref: dev
-          token: ${{ env.SSH }}
+          ssh-key: ${{ env.SSH }}
           # path: ./.github/actions/rhtaylor/frozen-desserts
           path: rhtaylor/fozen-desserts
           fetch-depth: 0
