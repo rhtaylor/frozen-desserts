@@ -37,11 +37,9 @@ jobs:
         uses: ruby/setup-ruby@v1
         with: 
           ruby-version: 3.2.1
-      - name: Generate lockfile
-        run: bundle lock
       - name: Build and run test
         run: |
-          sudo apt-get update
+          apt-get update
           apt-get -yqq install libpq-dev
           bundle install
           gem install bundler
