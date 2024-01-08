@@ -39,7 +39,7 @@ jobs:
           ruby-version: 3.2.1
       - name: Build and run test
         run: |
-          ls -la
+          sudo apt-get update
           apt-get -yqq install libpq-dev
           bundle install
           gem install bundler
