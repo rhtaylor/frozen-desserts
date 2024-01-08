@@ -53,8 +53,8 @@ jobs:
           sudo su
           sudo apt-get update
           sudo apt-get -yqq install libpq-dev
-          bundle install
           gem install bundler
+          bundle install
           bundle exec rake db:create
           bundle exec rake db:migrate
           bundle exec rspec .
