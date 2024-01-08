@@ -3,7 +3,7 @@ env:
     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     AWS_DEFAULT_REGION: 'us-east-2'
-    GIT_TOKEN: ${{ secrets.GIT_PAT_2 }}
+    SSH: ${{ secrets.ssh }}
     EMAIL: ${{ secrets.EMAIL }}
     USERNAME: ${{ secrets.NAME}}
 
@@ -28,7 +28,7 @@ jobs:
         with:
           repository: rhtaylor/frozen-desserts
           ref: dev
-          token: ${{ env.GIT_TOKEN }}
+          token: ${{ env.SSH }}
           # path: ./.github/actions/rhtaylor/frozen-desserts
           path: rhtaylor/fozen-desserts
           fetch-depth: 0
