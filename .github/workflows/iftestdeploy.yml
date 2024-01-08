@@ -16,8 +16,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    permissions:
-      contents:  read
+    permissions:  
+      actions: 'write'
+      packages: 'write'
+      pull-requests: 'read'
+      contents: 'write'
+      id-token: 'read'
     steps:
       # - name: Setup Git
       #   run: git config --global user.email ${{ env.EMAIL }} && git config --global user.name ${{ env.USERNAME }}
