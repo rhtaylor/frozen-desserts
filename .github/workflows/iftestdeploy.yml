@@ -17,10 +17,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     permissions:  
-      actions: 'write'
-      packages: 'write'
-      pull-requests: 'read'
-      contents: 'write'
+      actions: write
+      packages: write
+      pull-requests: read
+      contents: write
     steps:
       # - name: Setup Git
       #   run: git config --global user.email ${{ env.EMAIL }} && git config --global user.name ${{ env.USERNAME }}
@@ -51,8 +51,8 @@ jobs:
       - name: Build and run test
         run: |
           sudo su
-          apt-get update
-          apt-get -yqq install libpq-dev
+          sudo apt-get update
+          sudo apt-get -yqq install libpq-dev
           bundle install
           gem install bundler
           bundle exec rake db:create
