@@ -40,7 +40,6 @@ jobs:
       - name: Build and run test
         run: |
           ls -la
-          su runner
           apt-get -yqq install libpq-dev
           bundle install
           gem install bundler
