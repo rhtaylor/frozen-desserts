@@ -36,20 +36,29 @@ jobs:
           path: rhtaylor/fozen-desserts
           fetch-depth: 0
           persist-credentials: true
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with: 
+      # - name: Setup Ruby
+      #   uses: ruby/setup-ruby@v1
+      #   with: 
+      #     ruby-version: 3.2.1
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
+        with:
           ruby-version: 3.2.1
-      - name: Build and run test
-        run: |
-          sudo su
-          apt-get update
-          apt-get -yqq install libpq-dev
-          bundle install
-          gem install bundler
-          bundle exec rake db:create
-          bundle exec rake db:migrate
-          bundle exec rspec .
+      - name: Install dependencies
+        run: bundle install
+      - name: Run tests
+        run: bundle exec rake
+      # - name: Build and run test
+      #   run: bundle install
+        # run: |
+        #   sudo su
+        #   apt-get update
+        #   apt-get -yqq install libpq-dev
+        #   bundle install
+        #   gem install bundler
+        #   bundle exec rake db:create
+        #   bundle exec rake db:migrate
+        #   bundle exec rspec .
         if: success()
   deploy:
     runs-on: ubuntu-latest
