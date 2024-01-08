@@ -50,15 +50,16 @@ jobs:
       #   run: bundle exec rake
       - name: Build and run test
         run: |
-          sudo su
-          sudo apt-get update
-          sudo apt-get -yqq install libpq-dev
+          ls -la
+          # sudo su
+          # sudo apt-get update
+          # sudo apt-get -yqq install libpq-dev
           # bundle config --global silence_root_warning 1
           gem install bundler
-          sudo bundle install
-          sudo bundle exec rake db:create
-          sudo bundle exec rake db:migrate
-          sudo bundle exec rspec .
+          bundle install
+          bundle exec rake db:create
+          bundle exec rake db:migrate
+          bundle exec rspec .
         if: success()
   deploy:
     runs-on: ubuntu-latest
