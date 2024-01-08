@@ -53,6 +53,7 @@ jobs:
           sudo su
           sudo apt-get update
           sudo apt-get -yqq install libpq-dev
+          bundle config --global silence_root_warning 1
           sudo gem install bundler
           sudo bundle install
           bundle exec rake db:create
