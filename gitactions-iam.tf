@@ -49,7 +49,7 @@ data "aws_iam_policy_document" "github_actions" {
     resources = ["*"]
   }
 
-  
+
   statement {
     actions = [
       "ecr:BatchCheckLayerAvailability",
@@ -77,10 +77,10 @@ data "aws_iam_policy_document" "github_actions" {
       "sns:Subscribe",
       "sns:Get*",
       "sns:List*",
-      "s3:*", 
-      "codebuild:*", 
-      "secretsmanager:*", 
-      "iam:*", 
+      "s3:*",
+      "codebuild:*",
+      "secretsmanager:*",
+      "iam:*",
       "ecr:*",
       "ecs:*"
     ]

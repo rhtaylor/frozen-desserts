@@ -41,10 +41,6 @@ jobs:
       - name: Build and run test
         run: |
           cd rhtaylor/fozen-desserts
-         
-          # sudo apt-get update && sudo apt-get -yqq install libpq-dev
-          # bundle install --jobs 4 --retry 3
-          # # gem install bundler
           bundle install
           bundle exec rake db:create
           bundle exec rake db:migrate
@@ -71,19 +67,12 @@ jobs:
         - name: Terraform init, fmt, validate
           run: |
              ls -ls
-        # - name: Terraform init
-        #   id: init
-        #   run:  terraform init
-        # - name: Terraform format
-        #   id: fmt
-        #   run: terraform fmt -check
-        # - name: Terraform validate
-        #   id: validate
-        #   run : terraform validate
-        #   continue-on-error: false
-        # - name: Terraform plan
-        #   id: plan
-        #   run: terraform plan
-        # - name: Terraform Apply
-        #   id: apply
-        #   run: terraform apply --auto-approve
+             cd rhtaylor/fozen-desserts
+             terraform init
+             terraform fmt
+             terraform validate
+        - name: Terraform Apply
+          id: apply
+          run: |
+           cd rhtaylor/frozen-desserts
+           terraform apply --auto-approve
