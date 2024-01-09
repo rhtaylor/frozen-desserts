@@ -25,7 +25,7 @@ resource "aws_ecs_task_definition" "app" {
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-        "awslogs-group": "${aws_cloudwatch_log_group.psk_app.name}",
+        "awslogs-group": "${aws_cloudwatch_log_group.app.name}",
         "awslogs-region": "${var.region}",
         "awslogs-stream-prefix": "/ecs/${var.name}"
       }
