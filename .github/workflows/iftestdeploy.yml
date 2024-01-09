@@ -40,15 +40,15 @@ jobs:
         
       - name: Build and run test
         run: |
-          cd rhtaylor
-          ls -la
+          cd rhtaylor/fozen-desserts
+         
           # sudo apt-get update && sudo apt-get -yqq install libpq-dev
           # bundle install --jobs 4 --retry 3
           # # gem install bundler
-          # bundle install
-          # bundle exec rake db:create
-          # bundle exec rake db:migrate
-          # bundle exec rspec .
+          bundle install
+          bundle exec rake db:create
+          bundle exec rake db:migrate
+          bundle exec rspec .
         if: success()
   deploy:
     runs-on: ubuntu-latest
