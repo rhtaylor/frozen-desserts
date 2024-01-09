@@ -133,3 +133,7 @@ variable "bucketName" {
   default = ""
   type    = string
 }
+
+var domain_name{
+  default = "index.com"
+}
