@@ -61,7 +61,7 @@ jobs:
         
         - name: Terraform init, fmt, validate, apply
           run: |
-             sudo cd rhtaylor/frozen-desserts
+             cd rhtaylor/frozen-desserts
              terraform init
              terraform fmt
              terraform validate
