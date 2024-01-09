@@ -58,12 +58,7 @@ jobs:
             path: ./.github/actions/rhtaylor/frozen-desserts
             fetch-depth: 0
             persist-credentials: true 
-        - name: Configure AWS credentials from Test account
-          uses: aws-actions/configure-aws-credentials@v2
-          with:
-             aws-region: ${{ env.AWS_DEFAULT_REGION }}
-             role-to-assume: ${{ env.AWS_ACCOUNT_ROLE }}
-             role-session-name: GitHubActions
+        
         - name: Terraform init, fmt, validate
           run: |
              ls -la
