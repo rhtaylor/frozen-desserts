@@ -59,15 +59,10 @@ jobs:
             fetch-depth: 0
             persist-credentials: true 
         
-        - name: Terraform init, fmt, validate
+        - name: Terraform init, fmt, validate, apply
           run: |
-             cd rhtaylor
-             ls -la
+             sudo cd rhtaylor/frozen-desserts
              terraform init
              terraform fmt
              terraform validate
-        - name: Terraform Apply
-          id: apply
-          run: |
-           cd rhtaylor/frozen-desserts
-           terraform apply --auto-approve
+             terraform apply --auto-approve
