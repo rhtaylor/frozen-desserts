@@ -134,6 +134,13 @@ variable "bucketName" {
   type    = string
 }
 
-variable domain_name{
+variable domainName{
   default = "index.com"
+}
+
+variable tags {
+  default = {
+    name = "Frozen Desserts"
+    Company = "Strong Mind"
+  }
 }
