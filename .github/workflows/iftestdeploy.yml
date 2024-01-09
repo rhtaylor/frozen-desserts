@@ -61,7 +61,6 @@ jobs:
         
         - name: Terraform init, fmt, validate
           run: |
-             ls -la
              cd rhtaylor/fozen-desserts
              terraform init
              terraform fmt
