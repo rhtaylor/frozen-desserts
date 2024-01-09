@@ -4,10 +4,10 @@ output "alb_hostname" {
 
 output "name_servers" {
   description = "DNS Name servers used for the zone"
-  value       = aws_route53_zone.pskdomain_name.name_servers
+  value       = aws_route53_zone.domain_name.name_servers
 }
 
 output "hosted_zone_id" {
   description = "The hosted zone ID"
-  value       = aws_route53_zone.pskdomain_name.zone_id
+  value       = aws_route53_zone.domain_name.zone_id
 }
