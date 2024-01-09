@@ -138,7 +138,7 @@ variable domainName{
   default = "index.com"
 }
 
-variable tags {
+variable tag {
   default = {
     name = "Frozen Desserts"
     Company = "Strong Mind"
