@@ -1,4 +1,11 @@
 terraform {
+  
+  backend s3{
+    bucket = "terraform-backend-frozen-desserts"
+    key = "smfd-infra"
+    region = "us-east-2"
+  }
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
