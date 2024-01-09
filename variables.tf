@@ -134,6 +134,6 @@ variable "bucketName" {
   type    = string
 }
 
-var domain_name{
+variable domain_name{
   default = "index.com"
 }
