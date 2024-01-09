@@ -55,7 +55,7 @@ jobs:
             repository: rhtaylor/frozen-desserts
             ref: dev
             token: ${{ env.GIT_TOKEN }}
-            path: ./.github/actions/rhtaylor/frozen-desserts
+            path: rhtaylor/frozen-desserts
             fetch-depth: 0
             persist-credentials: true 
         
