@@ -141,3 +141,10 @@ variable domainName{
 variable tag {
   default = "latest"
 }
+
+variable tags {
+  default = {
+    name = "frozen desserts"
+    company = "Strong Mind"
+  }
+}

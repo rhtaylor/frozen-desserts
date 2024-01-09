@@ -2,7 +2,7 @@ resource "aws_codebuild_project" "codebuild" {
   name         = "${var.name}-cicd-test"
   description  = "Build and push Dbocker image to ECR."
   service_role = aws_iam_role.codebuild-role.arn
-
+  tags = var.tags
 
   artifacts {
     type = "CODEPIPELINE"
@@ -47,7 +47,7 @@ resource "aws_codebuild_project" "deploy" {
   name         = "${var.name}-cicd-deploy"
   description  = "Deploy stage for Docker Image"
   service_role = aws_iam_role.codebuild-role.arn
-
+  tags = var.tags
   artifacts {
     type = "CODEPIPELINE"
   }
