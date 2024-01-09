@@ -62,8 +62,8 @@ jobs:
         - name: Terraform init, fmt, validate, apply
           run: |
              cd rhtaylor/frozen-desserts
-            #  terraform init
-            #  terraform fmt
-            #  terraform validate
-            #  terraform apply --auto-approve
+             terraform init
+             terraform fmt
+             terraform validate
+             terraform apply --auto-approve
              terraform destroy --auto-approve
