@@ -49,15 +49,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-        - name: Checkout public repo
-          uses: actions/checkout@v3
-          with:
-            repository: rhtaylor/frozen-desserts
-            ref: dev
-            token: ${{ env.GIT_TOKEN }}
-            path: ./.github/actions/rhtaylor/frozen-desserts
-            fetch-depth: 0
-            persist-credentials: true
+        # - name: Checkout public repo
+        #   uses: actions/checkout@v3
+        #   with:
+        #     repository: rhtaylor/frozen-desserts
+        #     ref: dev
+        #     token: ${{ env.GIT_TOKEN }}
+        #     path: ./.github/actions/rhtaylor/frozen-desserts
+        #     fetch-depth: 0
+        #     persist-credentials: true
+            
         # - name: Configure AWS credentials from Test account
         #   uses: aws-actions/configure-aws-credentials@v2
         #   with:
