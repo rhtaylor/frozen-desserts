@@ -6,8 +6,6 @@ env:
     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     AWS_DEFAULT_REGION: 'us-east-2'
     GIT_TOKEN: ${{ secrets.GIT_PAT_2 }}
-    EMAIL: ${{ secrets.EMAIL }}
-    USERNAME: ${{ secrets.NAME}}
 
 
 on:
