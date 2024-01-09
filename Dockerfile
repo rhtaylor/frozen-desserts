@@ -25,3 +25,4 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
 
 
 ##docker run -d --name ror -p 3000:3000 <image>
+
