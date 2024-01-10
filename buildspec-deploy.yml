@@ -19,10 +19,16 @@ phases:
     commands:
     - echo Build completed on `date`
     - echo Pushing the Docker images...
-    - docker run image -d -p 3000:3000 $ECR_REPOSITORY_URI
+    # - docker run image -d -p 3000:3000 $ECR_REPOSITORY_URI
     - docker push $REPOSITORY_URI:latest
     - docker push $REPOSITORY_URI:$IMAGE_TAG
+    - apt-get install jq -y
+    - ContainerName = "frozendesserts"
+    - ImageURI=$(cat imageDetail.json | jq -r '.ImageURI')
+    - sed -i -e "s|CONTAINER_NAME|$ContainerName|g" imagedefinitions.json
+    - sed -i -e "s|IMAGE_URI|$ImageURI|g" imagedefinitions.json
     - echo Writing image definitions file...
-    - printf '[{"name":"%s" ,$ECR_REPOSITORY_URI:"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+    - cat imagedefinitions.json
+    # - printf '[{"name":"%s" , $ECR_REPOSITORY_URI:"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
     files: imagedefinitions.json
