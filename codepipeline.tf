@@ -44,6 +44,10 @@ resource "aws_codebuild_project" "codebuild" {
       name = "MEMORY"
       value = var.fargate_memory
     }
+    environment_variable{
+      name "ContainerName"
+      value = "frozendesserts"
+    }
 
   }
   source {
