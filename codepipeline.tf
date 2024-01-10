@@ -134,8 +134,8 @@ resource "aws_codepipeline" "cicd_pipeline" {
       owner           = "AWS"
       input_artifacts = ["code"]
       configuration = {
-        ClusterNmae = aws_ecs_cluster.main
-        ServiceName = aws_ecs_service.main
+        ClusterNmae = aws_ecs_cluster.main.name
+        ServiceName = aws_ecs_service.main.name
         FileName = "imagedefinitions.json"
         DeploymentTimeout = "15"
        }
