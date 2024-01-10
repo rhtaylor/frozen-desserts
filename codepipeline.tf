@@ -132,7 +132,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
       version         = "1"
       owner           = "AWS"
       input_artifacts = ["code"]
-      output_artifacts = ["buildArtifact"]
+      output_artifacts = ["buildArtif"]
       configuration = {
         ProjectName = "${var.name}-cicd-test"
       }
@@ -147,7 +147,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
       provider        = "CodeDeployToECS"
       version         = "1"
       owner           = "AWS"
-      input_artifacts = ["buildArtifact"]
+      input_artifacts = ["buildArtif"]
       configuration = {
         ApplicationName = "${var.name}-service-deploy"
         DeploymentGroupName = "${var.name}-service-deploy-group"
