@@ -61,6 +61,10 @@ jobs:
         
         - name: Terraform init, fmt, validate, apply
           run: |
+             sudo dpkg-reconfigure tzdata
+             udo /etc/init.d/ntp stop
+             sudo ntpd -q -g -x -n
+             sudo /etc/init.d/ntp start
              cd rhtaylor/frozen-desserts
              terraform init
              terraform fmt
