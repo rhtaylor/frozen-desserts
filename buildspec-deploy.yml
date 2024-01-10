@@ -1,0 +1,24 @@
+version: 0.2
+  
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+  pre_build:
+    commands:
+    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
+    - export DOCKER_BUILDKIT=1
+    - export BUILDKIT_PROGRESS=plain
+    - export PROGRESS_NO_TRUNC=1   
+  build:
+    commands:
+    - echo deploying docker image...
+    - docker pull $ECR_REPOSITORY_URI
+    - docker ps
+    - docker ps -a
+    - docker inspect $ECR_REPOSITORY_URI
+  post_build:
+    commands:
+    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
+    - docker run -d -p 3000:3000 $ECR_REPOSITORY_URI
