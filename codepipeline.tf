@@ -101,7 +101,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
       output_artifacts = ["code"]
       configuration = {
         FullRepositoryId     = var.git_repo
-        BranchName           = "main"
+        BranchName           = "dev"
         ConnectionArn        = jsondecode(data.aws_secretsmanager_secret_version.codestar_creds.secret_string)["CODESTAR_CREDS"]
         OutputArtifactFormat = "CODE_ZIP"
       }
