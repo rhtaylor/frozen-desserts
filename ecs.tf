@@ -57,7 +57,10 @@ resource "aws_ecs_service" "main" {
     target_group_arn = aws_alb_target_group.app.id
     container_name   = var.image_repo_name
     container_port   = var.port
-  }
 
+  }
+  deployment_controller {
+    type = "CODE_DEPLOY"
+  }
   depends_on = [aws_alb_listener.front_end, aws_iam_role_policy_attachment.ecs_task_execution_role]
 }

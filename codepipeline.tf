@@ -32,7 +32,18 @@ resource "aws_codebuild_project" "codebuild" {
       name  = "IMAGE_TAG"
       value = var.tag
     }
-
+    environment_variable {
+      name = "IMAGE_REPO_NAME"
+      value = var.image_repo_name
+    }
+    environment_variable {
+      name = "SERVICE_PORT"
+      value = var.port
+    }
+    environment_variable{
+      name = "MEMORY"
+      value = var.fargate_memory
+    }
 
   }
   source {
@@ -118,6 +129,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
       version         = "1"
       owner           = "AWS"
       input_artifacts = ["code"]
+      output_artifacts = ["buildArtifact"]
       configuration = {
         ProjectName = "${var.name}-cicd-test"
       }
@@ -129,15 +141,17 @@ resource "aws_codepipeline" "cicd_pipeline" {
     action {
       name            = "Deploy"
       category        = "Deploy"
-      provider        = "ECS"
+      provider        = "CodeDeployToECS"
       version         = "1"
       owner           = "AWS"
-      input_artifacts = ["code"]
+      input_artifacts = ["buildArtifact"]
       configuration = {
-        ClusterName = "${var.name}-cluster"
-        ServiceName = "${var.name}-service"
-        FileName = "imagedefinitions.json"
-        DeploymentTimeout = "15"
+        ApplicationName = "${var.name}-service-deploy"
+        DeploymentGroupName = "${var.name}-service-deploy-group"
+        TaskDefinitionTemplateArtifact = "BuildArtifact"
+        TaskDefinitionTemplatePath = "taskdef.json"
+        AppSpecTemplateArtifact = "BuildArtifact"
+        AppSpecTemplatePath = "appspec.yml"
        }
     }
   }
