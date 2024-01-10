@@ -18,8 +18,8 @@ resource "aws_ecs_task_definition" "app" {
     "essential": true,
     "portMappings": [
       {
-        "containerPort": 3000,
-        "hostPort": 3000
+        "containerPort": "3000",
+        "hostPort": "3000"
       }
     ],
     "logConfiguration": {
