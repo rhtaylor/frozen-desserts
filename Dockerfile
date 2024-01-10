@@ -1,4 +1,5 @@
 FROM ruby:3.2.1
+
 ENV PATH /root/.yarn/bin:$PATH
 ARG build_without
 ARG rails_env

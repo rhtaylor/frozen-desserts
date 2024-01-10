@@ -88,7 +88,7 @@ variable "port" {
   type        = number
   description = "Port Docker image exposes to traffic."
   #update to 443 for encryption
-  default = 80
+  default = 3000
 }
 
 variable "app_count" {
@@ -134,9 +134,6 @@ variable "bucketName" {
   type    = string
 }
 
-variable domainName{
-  default = "index.com"
-}
 
 variable tag {
   default = "latest"
