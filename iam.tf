@@ -313,22 +313,3 @@ resource "aws_iam_role_policy" "task_role" {
   role   = "${aws_iam_role.task_role.name}"
   policy = "${data.aws_iam_policy_document.task_role.json}"
 }
-
-resource "aws_security_group" "ecs" {
-  name   = "${var.name}-allow-ecs"
-  vpc_id = "${aws_vpc.main.id}"
-
-  ingress {
-    from_port       = 0
-    protocol        = "-1"
-    to_port         = 0
-    security_groups = ["${aws_security_group.alb.id}"]
-  }
-
-  egress {
-    from_port   = 0
-    protocol    = "-1"
-    to_port     = 0
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
