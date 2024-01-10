@@ -21,7 +21,8 @@ resource "aws_alb_target_group" "app" {
     unhealthy_threshold = "2"
   }
 } 
-resource "aws_alb_target_group" "senond" {
+
+resource "aws_alb_target_group" "second" {
   name        = "target-group"
   port        = 80
   protocol    = "HTTP"
