@@ -17,5 +17,12 @@ phases:
     - docker pull $ECR_REPOSITORY_URI
   post_build:
     commands:
-    - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
+    - echo Build completed on `date`
+    - echo Pushing the Docker images...
     - docker run image -d -p 3000:3000 $ECR_REPOSITORY_URI
+    - docker push $REPOSITORY_URI:latest
+    - docker push $REPOSITORY_URI:$IMAGE_TAG
+    - echo Writing image definitions file...
+    - printf '[{"name":"ROR App","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+    files: imagedefinitions.json

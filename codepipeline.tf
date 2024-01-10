@@ -128,14 +128,17 @@ resource "aws_codepipeline" "cicd_pipeline" {
     name = "Deploy"
     action {
       name            = "Deploy"
-      category        = "Build"
-      provider        = "CodeBuild"
+      category        = "Deploy"
+      provider        = "ECS"
       version         = "1"
       owner           = "AWS"
       input_artifacts = ["code"]
       configuration = {
-        ProjectName = "${var.name}-cicd-deploy"
-      }
+        ClusterNmae = aws_ecs_cluster.main
+        ServiceName = aws_ecs_service.main
+        FileName = "imagedefinitions.json"
+        DeploymentTimeout = "15"
+       }
     }
   }
 
