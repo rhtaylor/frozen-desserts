@@ -106,13 +106,13 @@ variable "health_check_path" {
 variable "fargate_cpu" {
   type        = string
   description = "CPU to provision for Fargate instances."
-  default     = "1024"
+  default     = 1024
 }
 
 variable "fargate_memory" {
   type        = string
   description = "Fargate instance memory to provision."
-  default     = "2048"
+  default     = 2048
 }
 
 variable "main_cidr" {
