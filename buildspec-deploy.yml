@@ -18,4 +18,4 @@ phases:
   post_build:
     commands:
     - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
-    - docker run -d -p 3000:3000 $ECR_REPOSITORY_URI
+    - docker run image -d -p 3000:3000 $ECR_REPOSITORY_URI
