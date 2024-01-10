@@ -15,9 +15,6 @@ phases:
     commands:
     - echo deploying docker image...
     - docker pull $ECR_REPOSITORY_URI
-    - docker ps
-    - docker ps -a
-    - docker inspect $ECR_REPOSITORY_URI
   post_build:
     commands:
     - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
