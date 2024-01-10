@@ -23,7 +23,7 @@ resource "aws_alb_target_group" "app" {
 } 
 
 resource "aws_alb_target_group" "second" {
-  name        = "target-group"
+  name        = "target-group-second"
   port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
