@@ -290,7 +290,7 @@ data "aws_iam_policy_document" "task_role" {
 
     actions = ["ecs:DescribeClusters"]
 
-    resources = ["${aws_ecs_cluster.this.arn}"]
+    resources = ["${aws_ecs_cluster.main.arn}"]
   }
 }
 
@@ -312,10 +312,6 @@ resource "aws_iam_role" "task_role" {
 resource "aws_iam_role_policy" "task_role" {
   role   = "${aws_iam_role.task_role.name}"
   policy = "${data.aws_iam_policy_document.task_role.json}"
-}
-
-resource "aws_ecs_cluster" "cluster" {
-  name = "${var.name}_cluster"
 }
 
 resource "aws_security_group" "ecs" {
