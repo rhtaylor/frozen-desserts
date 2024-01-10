@@ -29,6 +29,6 @@ phases:
     - sed -i -e "s|IMAGE_URI|$ImageURI|g" imagedefinitions.json
     - echo Writing image definitions file...
     - cat imagedefinitions.json
-    # - printf '[{"name":"%s" , $ECR_REPOSITORY_URI:"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+    - printf '[{"name":"%s" , $ECR_REPOSITORY_URI:"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
     files: imagedefinitions.json
