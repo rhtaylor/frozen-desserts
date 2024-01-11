@@ -28,7 +28,7 @@ phases:
     - sed -i 's/<IMAGE_NAME>/'$AWS_ACCOUNT_ID'\.dkr\.ecr\.'$AWS_DEFAULT_REGION'\.amazonaws.com\/'$IMAGE_REPO_NAME'\:'$IMAGE_TAG'/g' taskdef.json
     - apt-get install jq -y
     - ImageURI=$(cat imageDetail.json | jq -r '.ImageURI')
-    
+
     # - sed -i -e "s|CONTAINER_NAME|$ContainerName|g" imagedefinitions.json
     # - sed -i -e "s|IMAGE_URI|$ImageURI|g" imagedefinitions.json
     # - echo Writing image definitions file...
@@ -45,7 +45,7 @@ artifacts:
       files:
         - appspec.yaml
         - taskdef.json
-  ImageArtifact:
-    files:
-        - imageDetail.json
+ImageArtifact:
+  files:
+    - imageDetail.json
  
