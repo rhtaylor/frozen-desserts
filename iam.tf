@@ -225,9 +225,7 @@ data "aws_iam_policy_document" "codedeploy" {
       "lambda:InvokeFunction",
       "cloudwatch:DescribeAlarms",
       "sns:Publish",
-      "s3:GetObject",
-      "s3:GetObjectMetadata",
-      "s3:GetObjectVersion"
+      "s3:*",
     ]
 
     resources = ["*"]
