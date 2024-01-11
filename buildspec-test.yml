@@ -40,10 +40,10 @@ artifacts:
     - appspec.yml
     - taskdef.json
   secondary-artifacts:
-  DefinitionArtifact:
-    files:
-      - appspec.yaml
-      - taskdef.json
+    DefinitionArtifact:
+      files:
+        - appspec.yaml
+        - taskdef.json
   ImageArtifact:
     files:
       - imageDetail.json
