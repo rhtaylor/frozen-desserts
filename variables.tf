@@ -8,7 +8,7 @@ variable "prop_tags" {
   description = "Tags"
   type        = map(string)
   default = {
-    Project = "Codebuild Terraform"
+    Project = "Strong Mind Terraform"
     IaC     = "Terraform"
   }
 }
@@ -81,8 +81,6 @@ variable "az_count" {
   description = "Number of availability zones in Region."
   default     = 3
 }
-
-## REMEMBER TO BUILD ECR REPO URL WITH TAG IN CODE ##
 
 variable "port" {
   type        = number
