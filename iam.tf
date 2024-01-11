@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "cicd-pipeline-policies" {
   }
   statement {
     sid       = ""
-    actions   = ["cloudwatch:*", "s3:*", "codebuild:*", "ecr:*", "codedeploy:*", "ecs:*"]
+    actions   = ["cloudwatch:*", "s3:*", "codebuild:*", "ecr:*", "codedeploy:*", "ecs:*", "iam:*"]
     resources = ["*"]
     effect    = "Allow"
   }
