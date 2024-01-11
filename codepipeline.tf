@@ -151,7 +151,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
       configuration = {
         ApplicationName = "${var.name}-service-deploy"
         DeploymentGroupName = "${var.name}-service-deploy-group"
-        TaskDefinitionTemplateArtifact = "taskdef.json"
+        TaskDefinitionTemplateArtifact = "BuildArtifact"
         TaskDefinitionTemplatePath = "taskdef.json"
         AppSpecTemplateArtifact = "BuildArtifact"
         AppSpecTemplatePath = "appspec.yml"
