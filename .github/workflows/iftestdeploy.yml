@@ -66,6 +66,6 @@ jobs:
              terraform fmt
              terraform validate
              terraform apply --auto-approve
-             terraform apply -refresh-only --auto-approve
+            #  terraform apply -refresh-only --auto-approve
             #  terraform destroy --auto-approve
             ## will destroy with s3 backend later
