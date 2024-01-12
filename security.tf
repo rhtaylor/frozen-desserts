@@ -30,7 +30,7 @@ resource "aws_security_group" "ecs_tasks" {
   tags = var.tags
   ingress {
     protocol        = "TCP"
-    from_port       = "3000"
+    from_port       = "80"
     to_port         = "3000"
     security_groups = [aws_security_group.lb.id]
     cidr_blocks      = ["0.0.0.0/0"]
@@ -44,7 +44,7 @@ resource "aws_security_group" "ecs_tasks" {
   }
 }
 
-resource "aws_security_group" "ecs" {
+resource "aws_security_group" "3000" {
   name        = "ecs-security-group"
   description = "allow inbound access from the ALB only"
   vpc_id      = aws_vpc.main.id
