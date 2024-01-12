@@ -19,6 +19,19 @@ variable "codebuild_name" {
   default     = "strong-mind-codebuild-terraform"
 }
 
+variable "codebuild_params" {
+  description = "Codebuild parameters"
+  type        = map(string)
+  default = {
+  
+    "IMAGE"        = "aws/codebuild/amazonlinux2-x86_64-standard:5.0"
+    "TYPE"         = "LINUX_CONTAINER"
+    "COMPUTE_TYPE" = "BUILD_GENERAL1_SMALL"
+    "CRED_TYPE"    = "CODEBUILD"
+  }
+  sensitive = true
+}
+
 variable "environment_variables" {
   description = "Environment variables"
   type        = map(string)
