@@ -10,12 +10,7 @@ resource "aws_security_group" "lb" {
     to_port     = "80"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress {
-    protocol    = "TCP"
-    from_port   = "3000"
-    to_port     = "3000"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+
 
   egress {
     protocol    = "-1"
@@ -23,6 +18,14 @@ resource "aws_security_group" "lb" {
     to_port     = "0"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+resource "aws_vpc_security_group_ingress_rule" "green" {
+    security_group_id = aws_security_group.lb.id
+    cidr_ipv4 = aws_vpc.main.cidr_block
+    ip_protocol = "TCP"
+    from_port = "3000"
+    to_port = "3000"
 }
 
 # Traffic to the ECS cluster should only come from the ALB
