@@ -62,7 +62,7 @@ resource "aws_ecs_service" "main" {
   }
 
   load_balancer {
-    target_group_arn = aws_alb_target_group.app.id
+    target_group_arn = aws_alb_target_group.green.id
     container_name   = var.image_repo_name
     container_port   = var.port
 
@@ -75,5 +75,5 @@ resource "aws_ecs_service" "main" {
     base              = 0
     weight            = 100
   }
-  depends_on = [aws_alb_listener.front_end, aws_iam_role_policy_attachment.ecs_task_execution_role]
+  depends_on = [aws_alb_listener.green, aws_iam_role_policy_attachment.ecs_task_execution_role]
 }
