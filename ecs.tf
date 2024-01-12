@@ -71,6 +71,8 @@ resource "aws_ecs_service" "main" {
   }
   capacity_provider_strategy {
     capacity_provider = "FARGATE"
+    base              = 0
+    weight            = 100
   }
   depends_on = [aws_alb_listener.front_end, aws_iam_role_policy_attachment.ecs_task_execution_role]
 }
