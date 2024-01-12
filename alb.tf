@@ -12,8 +12,8 @@ resource "aws_alb_target_group" "blue" {
   target_type = "ip"
 
   health_check {
-    healthy_threshold   = "4"
-    interval            = "60"
+    healthy_threshold   = "3"
+    interval            = "30"
     protocol            = "HTTP"
     matcher             = "200-299"
     timeout             = "3"
