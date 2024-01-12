@@ -13,7 +13,7 @@ resource "aws_alb_target_group" "app" {
 
   health_check {
     healthy_threshold   = "4"
-    interval            = "70"
+    interval            = "60"
     protocol            = "HTTP"
     matcher             = "200-299"
     timeout             = "3"
@@ -47,8 +47,22 @@ resource "aws_alb_listener" "front_end" {
   protocol          = "HTTP"
 
   default_action {
-    target_group_arn = aws_alb_target_group.app.id
+    target_group_arn = aws_alb_target_group.second.id
     type             = "forward"
   }
 }
 
+resource "aws_alb_listener" "app" {
+  load_balancer_arn = aws_alb.load_balancer.id
+  port              = "3000"
+  protocol          = "HTTP"
+
+  default_action {
+    target_group_arn = aws_alb_target_group.app.id
+    type             = "forward"
+  }
+
+  lifecycle {
+    ignore_changes = [default_action]
+  }
+}
