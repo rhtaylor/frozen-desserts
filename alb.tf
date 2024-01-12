@@ -45,7 +45,7 @@ resource "aws_alb_target_group" "green" {
 }
 
 resource "aws_alb_target_group" "3000" {
-  name        = "target-group-second"
+  name        = "target-group-3000"
   port        = "3000"
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
