@@ -64,8 +64,9 @@ jobs:
              cd rhtaylor/frozen-desserts
              terraform init
              terraform fmt
-             terraform validate
-             terraform destroy --auto-approve
+             terraform state list
+            #  terraform validate
+            #  terraform destroy --auto-approve
             #  terraform apply --auto-approve
             #  terraform apply -refresh-only --auto-approve
             #  terraform destroy --auto-approve
