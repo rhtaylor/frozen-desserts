@@ -26,7 +26,7 @@ resource "aws_security_group" "ecs_tasks" {
   vpc_id      = aws_vpc.main.id
   tags = var.tags
   ingress {
-    protocol        = "tcp"
+    protocol        = "TCP"
     from_port       = "3000"
     to_port         = "3000"
     security_groups = [aws_security_group.lb.id]
