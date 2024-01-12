@@ -21,7 +21,7 @@ resource "aws_alb_target_group" "blue" {
     unhealthy_threshold = "2"
   }
 
-   depends_on = [ aws_alb.main, aws_security_group.ecs_tasks ]
+   depends_on = [ aws_alb.main ]
 } 
 
 resource "aws_alb_target_group" "green" {
