@@ -47,7 +47,7 @@ resource "aws_alb_target_group" "green" {
 # Redirect all traffic from the ALB to the target group
 resource "aws_alb_listener" "blue" {
   load_balancer_arn = aws_alb.main.id
-  port              = "80"
+  port              = "3000"
   protocol          = "HTTP"
 
   default_action {
