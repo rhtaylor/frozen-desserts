@@ -1,70 +1,70 @@
-# name: CI/CD
+name: CI/CD
 
-# env:
+env:
 
-#     AWS_ACCOUNT_ROLE: ${{ secrets.ROLE_TO_ASSUME }}
-#     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#     AWS_DEFAULT_REGION: 'us-east-2'
-#     GIT_TOKEN: ${{ secrets.GIT_PAT_2 }}
+    AWS_ACCOUNT_ROLE: ${{ secrets.ROLE_TO_ASSUME }}
+    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    AWS_DEFAULT_REGION: 'us-east-2'
+    GIT_TOKEN: ${{ secrets.GIT_PAT_2 }}
 
 
-# on:
-#   push:
-#     branches: [ 'dev' ]
+on:
+  push:
+    branches: [ 'dev' ]
 
     
-# jobs:
-#   test:
-#     runs-on: ubuntu-latest
+jobs:
+  test:
+    runs-on: ubuntu-latest
     
-#     steps:
-#       - name: Checkout public repo
-#         uses: actions/checkout@v3
-#         with:
-#           repository: rhtaylor/frozen-desserts
-#           ref: dev
-#           token: ${{ env.GIT_TOKEN }}
-#           # path: ./.github/actions/rhtaylor/frozen-desserts
-#           path: rhtaylor/fozen-desserts
-#           fetch-depth: 0
-#           persist-credentials: true
-#       - name: Setup Ruby
-#         uses: ruby/setup-ruby@v1
-#         with:
-#             ruby-version: 3.2.1
-#             bundler-cache: true
-#       - name: Install dependencies
-#         run: |
-#             sudo apt-get update && sudo apt-get -yqq install libpq-dev
+    steps:
+      - name: Checkout public repo
+        uses: actions/checkout@v3
+        with:
+          repository: rhtaylor/frozen-desserts
+          ref: dev
+          token: ${{ env.GIT_TOKEN }}
+          # path: ./.github/actions/rhtaylor/frozen-desserts
+          path: rhtaylor/fozen-desserts
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+            ruby-version: 3.2.1
+            bundler-cache: true
+      - name: Install dependencies
+        run: |
+            sudo apt-get update && sudo apt-get -yqq install libpq-dev
         
-#       - name: Build and run test
-#         run: |
-#           cd rhtaylor/fozen-desserts
-#           bundle install
-#           bundle exec rake db:create
-#           bundle exec rake db:migrate
-#           bundle exec rspec .
-#         if: success()
-#   deploy:
-#     runs-on: ubuntu-latest
-#     steps:
-#         - name: Checkout public repo
-#           uses: actions/checkout@v3
-#           with:
-#             repository: rhtaylor/frozen-desserts
-#             ref: dev
-#             token: ${{ env.GIT_TOKEN }}
-#             path: rhtaylor/frozen-desserts
-#             fetch-depth: 0
-#             persist-credentials: true 
+      - name: Build and run test
+        run: |
+          cd rhtaylor/fozen-desserts
+          bundle install
+          bundle exec rake db:create
+          bundle exec rake db:migrate
+          bundle exec rspec .
+        if: success()
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout public repo
+          uses: actions/checkout@v3
+          with:
+            repository: rhtaylor/frozen-desserts
+            ref: dev
+            token: ${{ env.GIT_TOKEN }}
+            path: rhtaylor/frozen-desserts
+            fetch-depth: 0
+            persist-credentials: true 
         
-#         - name: Terraform init, fmt, validate, apply
-#           run: |
-#              cd rhtaylor/frozen-desserts
-#              terraform init
-#              terraform fmt
-#              terraform validate
-#              terraform apply --auto-approve
-#             #  terraform destroy --auto-approve
-#             ## will destroy with s3 backend later
+        - name: Terraform init, fmt, validate, apply
+          run: |
+             cd rhtaylor/frozen-desserts
+             terraform init
+             terraform fmt
+             terraform validate
+             terraform apply --auto-approve
+            #  terraform destroy --auto-approve
+            ## will destroy with s3 backend later
