@@ -12,8 +12,8 @@ resource "aws_alb_target_group" "app" {
   target_type = "ip"
 
   health_check {
-    healthy_threshold   = "3"
-    interval            = "30"
+    healthy_threshold   = "4"
+    interval            = "70"
     protocol            = "HTTP"
     matcher             = "200-299"
     timeout             = "3"
@@ -30,11 +30,11 @@ resource "aws_alb_target_group" "second" {
   target_type = "ip"
 
   health_check {
-    healthy_threshold   = "3"
-    interval            = "30"
+    healthy_threshold   = "4"
+    interval            = "60"
     protocol            = "HTTP"
     matcher             = "200-299"
-    timeout             = "3"
+    timeout             = "5"
     path                = var.health_check_path
     unhealthy_threshold = "2"
   }
