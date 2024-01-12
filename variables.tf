@@ -19,31 +19,6 @@ variable "codebuild_name" {
   default     = "strong-mind-codebuild-terraform"
 }
 
-variable "codebuild_params" {
-  description = "Codebuild parameters"
-  type        = map(string)
-  default = {
-    "NAME"         = "catsafe-docker"
-    "GIT_REPO"     = "https://github.com/rhtaylor/catsafecatios"
-    "IMAGE"        = "aws/codebuild/amazonlinux2-x86_64-standard:5.0"
-    "TYPE"         = "LINUX_CONTAINER"
-    "COMPUTE_TYPE" = "BUILD_GENERAL1_SMALL"
-    "CRED_TYPE"    = "CODEBUILD"
-  }
-  sensitive = true
-}
-
-variable "environment_variables" {
-  description = "Environment variables"
-  type        = map(string)
-  default = {
-    "AWS_DEFAULT_REGION" = "us-east-2"
-    "IMAGE_REPO_NAME"    = "frozendesserts"
-    "IMAGE_TAG"          = "latest"
-  }
-  sensitive = true
-}
-
 variable "name" {
   type        = string
   description = "Name of infrastructure project."
@@ -62,19 +37,6 @@ variable "image_repo_name" {
   default     = "frozendesserts"
 }
 
-variable "ecs_task_execution_role_name" {
-  type        = string
-  description = "Name of ECS Task execution role."
-  #add later
-  default = "value"
-}
-
-variable "ecs_auto_scale_role_name" {
-  type        = string
-  description = "Name of autoscaling group."
-  #add later
-  default = ""
-}
 
 variable "az_count" {
   type        = number
@@ -123,13 +85,6 @@ variable "docker_tag" {
   type        = string
   description = "Image tag for docker."
   default     = "latest"
-}
-
-
-
-variable "bucketName" {
-  default = ""
-  type    = string
 }
 
 

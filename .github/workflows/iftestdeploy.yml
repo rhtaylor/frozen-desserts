@@ -11,7 +11,7 @@ env:
 
 on:
   push:
-    branches: [ 'dev' ]
+    branches: [ 'main' ]
 
     
 jobs:
@@ -65,6 +65,7 @@ jobs:
              terraform init
              terraform fmt
              terraform validate
+             terraform apply -refresh-only --auto-approve
              terraform apply --auto-approve
             #  terraform destroy --auto-approve
             ## will destroy with s3 backend later
