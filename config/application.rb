@@ -12,6 +12,7 @@ module FrozenDesserts
     config.load_defaults 7.0
     config.hosts << /.*\.amazonaws\.com/
     config.hosts << /[a-z0-9]+\.amazonaws\.com/
+    
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

@@ -5,7 +5,7 @@ Rails.application.configure do
   config.hosts.clear
   config.hosts << /.*\.amazonaws\.com/
   config.hosts << /[a-z0-9]+\.amazonaws\.com/
-  
+  config.hosts << "load-balancer-542437021.us-east-2.elb.amazonaws.com"
   # Code is not reloaded between requests.
   config.cache_classes = true
 
