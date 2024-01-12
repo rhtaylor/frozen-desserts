@@ -6,7 +6,7 @@ resource "aws_alb" "main" {
 
 resource "aws_alb_target_group" "blue" {
   name        = "target-group"
-  port        = "80"
+  port        = "3000"
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
