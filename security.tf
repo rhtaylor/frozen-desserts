@@ -27,6 +27,13 @@ resource "aws_vpc_security_group_ingress_rule" "green" {
     from_port = "3000"
     to_port = "3000"
 }
+resource "aws_vpc_security_group_ingress_rule" "blue" {
+    security_group_id = aws_security_group.ecs_tasks.id
+    cidr_ipv4 = aws_vpc.main.cidr_block
+    ip_protocol = "TCP"
+    from_port = "80"
+    to_port = "80"
+}
 
 # Traffic to the ECS cluster should only come from the ALB
 resource "aws_security_group" "ecs_tasks" {
@@ -38,7 +45,7 @@ resource "aws_security_group" "ecs_tasks" {
     protocol        = "TCP"
     from_port       = "3000"
     to_port         = "3000"
-    security_groups = [aws_security_group.lb]
+    security_groups = [aws_security_group.lb.id]
     cidr_blocks      = ["0.0.0.0/0"]
   }
 
