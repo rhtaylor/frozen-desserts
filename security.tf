@@ -9,7 +9,12 @@ resource "aws_security_group" "lb" {
     from_port   = "80"
     to_port     = "80"
     cidr_blocks = ["0.0.0.0/0"]
-   
+  }
+  ingress {
+    protocol    = "TCP"
+    from_port   = "3000"
+    to_port     = "3000"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
