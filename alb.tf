@@ -1,7 +1,7 @@
 resource "aws_alb" "main" {
   name            = "load-balancer"
   subnets         = aws_subnet.pub.*.id
-  security_groups = [aws_security_group.lb.id, aws_security_group.ecs_tasks.id]
+  security_groups = [aws_security_group.lb.id, aws_security_group.ecs_tasks.id, aws_security_group.ecs.id]
 }
 
 resource "aws_alb_target_group" "blue" {
