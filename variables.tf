@@ -23,7 +23,8 @@ variable "codebuild_params" {
   description = "Codebuild parameters"
   type        = map(string)
   default = {
-  
+    "NAME"         = "catsafe-docker"
+    "GIT_REPO"     = "https://github.com/rhtaylor/catsafecatios"
     "IMAGE"        = "aws/codebuild/amazonlinux2-x86_64-standard:5.0"
     "TYPE"         = "LINUX_CONTAINER"
     "COMPUTE_TYPE" = "BUILD_GENERAL1_SMALL"
