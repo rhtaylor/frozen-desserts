@@ -168,7 +168,8 @@ data "aws_iam_policy_document" "ecs_service_scaling" {
       "sns:Subscribe",
       "sns:Get*",
       "sns:List*", 
-      "codedeploy:*"
+      "codedeploy:*", 
+      "iam:*"
     ]
 
     resources = [
@@ -227,7 +228,8 @@ data "aws_iam_policy_document" "codedeploy" {
       "cloudwatch:DescribeAlarms",
       "sns:Publish",
       "s3:*",
-      "codedeploy:*"
+      "codedeploy:*",
+      "iam:*"
     ]
 
     resources = ["*"]
@@ -277,7 +279,8 @@ data "aws_iam_policy_document" "execution_role" {
       "ecr:BatchGetImage",
       "logs:CreateLogStream",
       "logs:PutLogEvents",
-      "codedeploy:*"
+      "codedeploy:*",
+      "iam:*"
     ]
 
     resources = ["*"]
