@@ -65,5 +65,4 @@ jobs:
              terraform init
              terraform fmt
              terraform validate
-             terraform destroy --auto-approve
-            #  terraform apply --auto-approve
+             terraform apply --auto-approve
