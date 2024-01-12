@@ -19,6 +19,17 @@ variable "codebuild_name" {
   default     = "strong-mind-codebuild-terraform"
 }
 
+variable "environment_variables" {
+  description = "Environment variables"
+  type        = map(string)
+  default = {
+    "AWS_DEFAULT_REGION" = "us-east-2"
+    "IMAGE_REPO_NAME"    = "frozendesserts"
+    "IMAGE_TAG"          = "latest"
+  }
+  sensitive = true
+}
+
 variable "name" {
   type        = string
   description = "Name of infrastructure project."
