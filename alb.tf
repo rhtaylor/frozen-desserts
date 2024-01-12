@@ -66,9 +66,6 @@ resource "aws_alb_listener" "green" {
     type             = "forward"
   }
 
-  lifecycle {
-    ignore_changes = [default_action]
-  }
 }
 
 
