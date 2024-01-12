@@ -71,6 +71,8 @@ resource "aws_alb_listener" "green" {
   }
 }
 
+
+
 # resource "aws_alb_listener" "application_redirection" {
 #   load_balancer_arn = aws_alb.main.arn
 #   port              = 80
