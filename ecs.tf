@@ -24,7 +24,8 @@ resource "aws_ecs_task_definition" "app" {
        "FARGATE" 
     ],
     "portMappings": [
-      {
+      {  
+        "protocol": "tcp",
         "containerPort": 3000,
         "hostPort": 3000
       }
@@ -53,7 +54,7 @@ resource "aws_ecs_service" "main" {
   task_definition = aws_ecs_task_definition.app.arn
   desired_count   = var.app_count
   # launch_type     = "FARGATE"
-
+  
   network_configuration {
     security_groups  = [aws_security_group.ecs_tasks.id]
     subnets          = aws_subnet.pri.*.id
