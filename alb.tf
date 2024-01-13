@@ -60,7 +60,7 @@ resource "aws_alb_listener" "blue" {
 
 resource "aws_alb_listener" "green" {
   load_balancer_arn = aws_alb.main.id
-  port              = "3000"
+  port              = "80"
   protocol          = "HTTP"
 
   default_action {
