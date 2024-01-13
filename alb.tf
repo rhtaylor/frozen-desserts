@@ -7,14 +7,14 @@ resource "aws_alb" "main" {
 resource "aws_alb_target_group" "blue" {
   name        = "target-group"
   port        = "80"
-  protocol    = "HTTP"
+  protocol    = "TCP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
 
   health_check {
     healthy_threshold   = "3"
     interval            = "30"
-    protocol            = "HTTP"
+    protocol            = "TCP"
     matcher             = "200-299"
     timeout             = "3"
     path                = var.health_check_path
@@ -27,7 +27,7 @@ resource "aws_alb_target_group" "blue" {
 resource "aws_alb_target_group" "green" {
   name        = "target-group-second"
   port        = "80"
-  protocol    = "HTTP"
+  protocol    = "TCP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
 
@@ -97,20 +97,3 @@ resource "aws_alb_listener" "rails" {
     type             = "forward"
   }
 }
-
-
-# resource "aws_alb_listener" "application_redirection" {
-#   load_balancer_arn = aws_alb.main.arn
-#   port              = 80
-#   protocol          = "HTTP"
-
-#   default_action {
-#     type = "redirect"
-
-#     redirect {
-#       port        = "3000"
-#       protocol    = "HTTP"
-#       status_code = "HTTP_301"
-#     }
-#   }
-# }

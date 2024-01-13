@@ -40,7 +40,7 @@ resource "aws_codedeploy_deployment_group" "this" {
         name = "${aws_alb_target_group.blue.name}"
      }
       target_group {
-        name = "${aws_alb_target_group.rails.name}"
+        name = "${aws_alb_target_group.green.name}"
      }
      
     }
