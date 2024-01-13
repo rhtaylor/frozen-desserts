@@ -5,7 +5,7 @@ resource "aws_security_group" "lb" {
   tags = var.tags
 
   ingress {
-    protocol    = "TCP"
+    protocol    = "HTTP"
     from_port   = "80"
     to_port     = "80"
     cidr_blocks = ["0.0.0.0/0"]
@@ -29,9 +29,9 @@ resource "aws_security_group" "ecs_tasks" {
   vpc_id      = aws_vpc.main.id
   tags = var.tags
   ingress {
-    protocol        = "TCP"
+    protocol        = "HTTP"
     from_port       = "80"
-    to_port         = "3000"
+    to_port         = "80"
     security_groups = [aws_security_group.lb.id]
     cidr_blocks      = ["0.0.0.0/0"]
   }
