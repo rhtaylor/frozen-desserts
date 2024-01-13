@@ -2,7 +2,7 @@ resource "aws_alb" "main" {
   name            = "load-balancer"
   subnets         = aws_subnet.pub.*.id
   internal = false
-  security_groups = [aws_security_group.lb.id, aws_security_group.ecs_tasks.id]
+  security_groups = [aws_security_group.alb_ecs_sg.id, aws_security_group.ecs_sg.id]
 }
 
 locals {
