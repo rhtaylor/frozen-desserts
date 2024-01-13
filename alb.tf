@@ -8,9 +8,9 @@ resource "aws_alb" "main" {
 resource "aws_alb_target_group" "blue" {
   name        = "target-group"
   port        = "80"
-  protocol    = "TCP"
+  protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
-  target_type = "ip"
+  
 
   health_check {
     healthy_threshold   = "3"
@@ -28,9 +28,9 @@ resource "aws_alb_target_group" "blue" {
 resource "aws_alb_target_group" "green" {
   name        = "target-group-second"
   port        = "80"
-  protocol    = "TCP"
+  protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
-  target_type = "ip"
+  
 
   health_check {
     healthy_threshold   = "4"
@@ -50,7 +50,7 @@ resource "aws_alb_target_group" "green" {
 resource "aws_alb_listener" "blue" {
   load_balancer_arn = aws_alb.main.id
   port              = "80"
-  protocol          = "TCP"
+  protocol          = "HTTP"
 
   default_action {
     target_group_arn = aws_alb_target_group.blue.id
