@@ -76,7 +76,7 @@ resource "aws_lb_listener_rule" "blue"{
 
  action {
   type = "forward"
-  target_group_arn = aws_lb_target_group.green.arn
+  target_group_arn = aws_lb_target_group.blue.arn
  }
 # because CodeDeploy will switch target groups during the B/G deployment
  lifecycle {
