@@ -63,40 +63,40 @@ resource "aws_lb_listener" "main_test_blue_green" {
   }
 }
 
-# resource "aws_security_group" "alb_ecs_sg" {
-#     vpc_id = aws_vpc.main.vpc_id
+resource "aws_security_group" "alb_ecs_sg" {
+    vpc_id = aws_vpc.main.vpc_id
 
-#     ingress {
-#         protocol         = "HTTP"
-#         from_port        = "80"
-#         to_port          = "80"
-#         cidr_blocks      = ["0.0.0.0/0"]
-#     }
+    ingress {
+        protocol         = "HTTP"
+        from_port        = "80"
+        to_port          = "80"
+        cidr_blocks      = ["0.0.0.0/0"]
+    }
 
-#     ## Allow outbound to ecs instances in private subnet
-#     egress {
-#         protocol    = "HTTP"
-#         from_port   = local.target_port
-#         to_port     = local.target_port
-#         cidr_blocks = aws_subnet.pri[*].cidr_block
-#     }
-# }
+    ## Allow outbound to ecs instances in private subnet
+    egress {
+        protocol    = "HTTP"
+        from_port   = local.target_port
+        to_port     = local.target_port
+        cidr_blocks = aws_subnet.pri[*].cidr_block
+    }
+}
 
-# resource "aws_security_group" "ecs_sg" {
-#     vpc_id = aws_vpc.main.vpc_id
-#     ingress {
-#         protocol         = "HTTP"
-#         from_port        = "0"
-#         to_port          = "3000"
-#         security_groups  = [aws_security_group.alb_ecs_sg.id]
-#     }
-#       egress {
-#         protocol         = -1
-#         from_port        = 0
-#         to_port          = 0
-#         cidr_blocks      = ["0.0.0.0/0"]
-#     }
-# }
+resource "aws_security_group" "ecs_sg" {
+    vpc_id = aws_vpc.main.vpc_id
+    ingress {
+        protocol         = "HTTP"
+        from_port        = "0"
+        to_port          = "3000"
+        security_groups  = [aws_security_group.alb_ecs_sg.id]
+    }
+      egress {
+        protocol         = -1
+        from_port        = 0
+        to_port          = 0
+        cidr_blocks      = ["0.0.0.0/0"]
+    }
+}
 
 # resource "aws_alb_target_group" "blue" {
 #   name        = "target-group-blue"
