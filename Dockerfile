@@ -22,7 +22,7 @@ RUN rails db:migrate
 
 EXPOSE 3000
 # Start the main process.
-CMD ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0" "-p", "3000", ]
 
 
 ##docker run -d --name ror -p 3000:3000 <image>
