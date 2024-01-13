@@ -33,8 +33,8 @@ resource "aws_security_group" "ecs_sg" {
     vpc_id = aws_vpc.main.vpc_id
     ingress {
         protocol         = "tcp"
-        from_port        = "80"
-        to_port          = "80"
+        from_port        = "0"
+        to_port          = "3000"
         security_groups  = [aws_security_group.alb_ecs_sg.id]
     }
       egress {
