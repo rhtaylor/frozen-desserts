@@ -33,7 +33,7 @@ resource "aws_codedeploy_deployment_group" "this" {
   load_balancer_info {
     target_group_pair_info {
       prod_traffic_route {
-        listener_arns = ["${aws_alb_listener.green.arn}"]
+        listener_arns = ["${aws_alb_listener.blue.arn}"]
       }
 
      target_group {
