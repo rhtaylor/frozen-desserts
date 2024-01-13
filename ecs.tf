@@ -74,5 +74,5 @@ resource "aws_ecs_service" "main" {
     type = "CODE_DEPLOY"
   }
 
-  depends_on = [aws_alb_listener.main_blue_green, aws_iam_role_policy_attachment.ecs_task_execution_role]
+  depends_on = [aws_alb_listener.fargate, aws_iam_role_policy_attachment.ecs_task_execution_role]
 }

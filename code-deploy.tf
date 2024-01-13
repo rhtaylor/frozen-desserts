@@ -41,11 +41,11 @@ auto_rollback_configuration {
   load_balancer_info {
     target_group_pair_info {
       prod_traffic_route {
-        listener_arns = ["${aws_alb_listener.main_blue_green.arn}"]
+        listener_arns = ["${aws_lb_listener.green.arn}"]
       }
 
      target_group {
-        name = "${aws_alb_target_group.main_blue_green.name}"
+        name = "${aws_lb_target_group.fargate.name}"
      }
       target_group {
         name = "${aws_alb_target_group.main_test_blue_green.name}"
