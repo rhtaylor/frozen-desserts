@@ -65,7 +65,7 @@ resource "aws_ecs_service" "main" {
   }
 
   load_balancer {
-    target_group_arn = aws_alb_target_group.blue.arn
+    target_group_arn = aws_alb_target_group.green.arn
     container_name   = var.image_repo_name
     container_port   = var.port
 
@@ -74,5 +74,5 @@ resource "aws_ecs_service" "main" {
     type = "CODE_DEPLOY"
   }
 
-  depends_on = [aws_alb_listener.blue, aws_iam_role_policy_attachment.ecs_task_execution_role]
+  depends_on = [aws_alb_listener.green, aws_iam_role_policy_attachment.ecs_task_execution_role]
 }

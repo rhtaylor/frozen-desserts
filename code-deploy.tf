@@ -18,7 +18,9 @@ resource "aws_codedeploy_deployment_group" "this" {
       action                           = "TERMINATE"
       termination_wait_time_in_minutes = 60
     }
+ 
   }
+  
 
   ecs_service {
     cluster_name = "${aws_ecs_cluster.main.name}"
@@ -33,7 +35,7 @@ resource "aws_codedeploy_deployment_group" "this" {
   load_balancer_info {
     target_group_pair_info {
       prod_traffic_route {
-        listener_arns = ["${aws_alb_listener.green.arn}", "${aws_alb_listener.blue.arn}"]
+        listener_arns = ["${aws_alb_listener.green.arn}"]
       }
 
      target_group {

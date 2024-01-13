@@ -87,7 +87,7 @@ resource "aws_alb_target_group" "green" {
   health_check {
     healthy_threshold   = "3"
     interval            = "30"
-    protocol            = "TCP"
+    protocol            = "HTTP"
     matcher             = "200-499"
     timeout             = "5"
     path                = var.health_check_path
@@ -109,13 +109,13 @@ resource "aws_alb_listener" "green" {
 
 }
 
-resource "aws_lb_listener_rule" "blue"{
+resource "aws_lb_listener_rule" "green"{
  listener_arn = aws_alb.main.arn
  priority = 90
 
  action {
   type = "forward"
-  target_group_arn = aws_lb_target_group.blue.arn
+  target_group_arn = aws_lb_target_group.green.arn
  }
 # because CodeDeploy will switch target groups during the B/G deployment
  lifecycle {
