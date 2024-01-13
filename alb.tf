@@ -1,7 +1,7 @@
 resource "aws_alb" "main" {
   name            = "load-balancer"
   subnets         = aws_subnet.pub.*.id
-  security_groups = [aws_security_group.lb.id, aws_security_group.ecs_tasks.id, aws_security_group.3000.id]
+  security_groups = [aws_security_group.lb.id, aws_security_group.ecs_tasks.id, aws_security_group.rails.id]
 }
 
 resource "aws_alb_target_group" "blue" {
@@ -44,7 +44,7 @@ resource "aws_alb_target_group" "green" {
   depends_on = [ aws_alb.main ]
 }
 
-resource "aws_alb_target_group" "3000" {
+resource "aws_alb_target_group" "rails" {
   name        = "target-group-3000"
   port        = "3000"
   protocol    = "HTTP"
@@ -87,13 +87,13 @@ resource "aws_alb_listener" "green" {
 
 }
 
-resource "aws_alb_listener" "3000" {
+resource "aws_alb_listener" "rails" {
   load_balancer_arn = aws_alb.main.id
   port              = "3000"
   protocol          = "HTTP"
 
   default_action {
-    target_group_arn = aws_alb_target_group.3000.id
+    target_group_arn = aws_alb_target_group.rails.id
     type             = "forward"
   }
 }

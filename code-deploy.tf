@@ -36,11 +36,11 @@ resource "aws_codedeploy_deployment_group" "this" {
         listener_arns = ["${aws_alb_listener.green.arn}"]
       }
 
-      target_group {
-        name = "${aws_alb_target_group.green.name}"
-      }
      target_group {
         name = "${aws_alb_target_group.blue.name}"
+     }
+      target_group {
+        name = "${aws_alb_target_group.rails.name}"
      }
      
     }
