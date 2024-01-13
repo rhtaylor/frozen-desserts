@@ -112,6 +112,7 @@ resource "aws_security_group_rule" "ingress" {
 
 resource "aws_alb_target_group" "bg" {
   count = length(local.target_groups)
+  name = "${var.name}-bg-${local.target_groups[count.index]}"
   port = 80
   protocol = "HTTP"
   target_type = "instance"
