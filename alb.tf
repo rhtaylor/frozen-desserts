@@ -72,7 +72,7 @@ resource "aws_alb_listener" "green" {
 
 resource "aws_lb_listener_rule" "blue"{
  listener_arn = aws_alb.main.arn
- priority = 99
+ priority = 90
 
  action {
   type = "forward"
