@@ -150,8 +150,7 @@ data "aws_iam_policy_document" "ecs_service_scaling" {
 
     actions = [
       "application-autoscaling:*",
-      "ecs:DescribeServices",
-      "ecs:UpdateService",
+      "ecs:*",
       "cloudwatch:DescribeAlarms",
       "cloudwatch:PutMetricAlarm",
       "cloudwatch:DeleteAlarms",
@@ -216,10 +215,7 @@ data "aws_iam_policy_document" "codedeploy" {
     effect = "Allow"
 
     actions = [
-      "ecs:CreateTaskSet",
-      "ecs:DeleteTaskSet",
-      "ecs:DescribeServices",
-      "ecs:UpdateServicePrimaryTaskSet",
+      "ecs:*",
       "lambda:InvokeFunction",
       "elasticloadbalancing:*",
       "cloudwatch:DescribeAlarms",
@@ -278,7 +274,9 @@ data "aws_iam_policy_document" "execution_role" {
       "logs:PutLogEvents",
       "codedeploy:*",
       "elasticloadbalancing:*",
-      "iam:*"
+      "iam:*",
+      "ecs:*"
+
     ]
 
     resources = ["*"]
