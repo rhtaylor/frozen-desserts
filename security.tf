@@ -44,7 +44,7 @@ resource "aws_security_group" "ecs_tasks" {
   }
 }
 
-resource "aws_security_group" "3000" {
+resource "aws_security_group" "rails" {
   name        = "ecs-security-group"
   description = "allow inbound access from the ALB only"
   vpc_id      = aws_vpc.main.id
