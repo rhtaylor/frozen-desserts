@@ -59,7 +59,7 @@ resource "aws_ecs_service" "main" {
   force_new_deployment = true 
   scheduling_strategy = "REPLICA"
   network_configuration {
-    security_groups  = [aws_security_group.ecs_sg.id]
+    security_groups  = [aws_security_group.ecs_sg.id, aws_security_group.alb_ecs_sg.id]
     subnets          = aws_subnet.pri.*.id
     assign_public_ip = true
   }
