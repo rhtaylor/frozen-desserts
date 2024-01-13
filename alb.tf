@@ -69,3 +69,22 @@ resource "aws_alb_listener" "green" {
   }
 
 }
+
+resource "aws_lb_listener_rule" "blue"{
+ listener_arn = aws_alb.main.arn
+ priority = 99
+
+ action {
+  type = "forward"
+  target_group_arn = aws_lb_target_group.blue.arn
+ }
+# because CodeDeploy will switch target groups during the B/G deployment
+ lifecycle {
+   ignore_changes = [action] 
+ }
+   condition {
+    host_header {
+      values = ["amazonaws.com"]
+    }
+  }
+}
