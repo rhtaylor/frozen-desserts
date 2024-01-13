@@ -33,8 +33,8 @@ resource "aws_security_group" "ecs_sg" {
     vpc_id = aws_vpc.main.vpc_id
     ingress {
         protocol         = "tcp"
-        from_port        = "3000"
-        to_port          = "3000"
+        from_port        = "80"
+        to_port          = "80"
         security_groups  = [aws_security_group.alb_ecs_sg.id]
     }
       egress {
@@ -79,7 +79,7 @@ resource "aws_alb_listener" "blue" {
 
 resource "aws_alb_target_group" "green" {
   name        = "target-group-green"
-  port        = "3000"
+  port        = "80"
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
