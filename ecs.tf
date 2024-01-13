@@ -6,6 +6,7 @@ resource "aws_ecs_cluster" "main" {
 resource "aws_ecs_task_definition" "app" {
   family                   = "app-task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  task_role_arn = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.fargate_cpu
@@ -17,6 +18,7 @@ resource "aws_ecs_task_definition" "app" {
     "image": "${jsondecode(data.aws_secretsmanager_secret_version.account_id.secret_string)["AWS_ACCOUNT_ID"]}.dkr.ecr.${var.region}.amazonaws.com/${var.image_repo_name}:${var.docker_tag}",
     "essential": true,
     "networkMode": "awsvpc",
+    "entryPoint": []
      "runtimePlatform": {
         "operatingSystemFamily": "LINUX"
     },
@@ -25,7 +27,7 @@ resource "aws_ecs_task_definition" "app" {
     ],
     "portMappings": [
       {  
-        "protocol": "tcp",
+        
         "containerPort": 3000,
         "hostPort": 3000
       }
@@ -53,10 +55,11 @@ resource "aws_ecs_service" "main" {
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.app.arn
   desired_count   = var.app_count
-  # launch_type     = "FARGATE"
-  
+  launch_type     = "FARGATE"
+  force_new_deployment = true 
+  scheduling_strategy = "REPLICA"
   network_configuration {
-    security_groups  = [aws_security_group.ecs_tasks.id]
+    security_groups  = [aws_security_group.ecs_sg.id]
     subnets          = aws_subnet.pri.*.id
     assign_public_ip = true
   }
@@ -70,10 +73,6 @@ resource "aws_ecs_service" "main" {
   deployment_controller {
     type = "CODE_DEPLOY"
   }
-  capacity_provider_strategy {
-    capacity_provider = "FARGATE"
-    base              = 0
-    weight            = 100
-  }
+
   depends_on = [aws_alb_listener.blue, aws_iam_role_policy_attachment.ecs_task_execution_role]
 }
