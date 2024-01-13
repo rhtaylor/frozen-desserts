@@ -76,7 +76,7 @@ EOF
 data "aws_iam_policy_document" "cicd-build-policies" {
   statement {
     sid       = ""
-    actions   = ["logs:*", "s3:*", "codebuild:*", "secretsmanager:*", "iam:*", "ecr:*", "ecr:completeLayerUpload", "ecr:InitiateLayerUpload", "ecr:PutImage", "ecr:UploadLayerPart", "codedeploy:*", "ecs:*"]
+    actions   = ["logs:*", "s3:*", "codebuild:*", "secretsmanager:*", "iam:*", "ecr:*", "ecr:completeLayerUpload", "ecr:InitiateLayerUpload", "ecr:PutImage", "ecr:UploadLayerPart", "codedeploy:*", "ecs:*","elasticloadbalancing:*"]
     resources = ["*"]
     effect    = "Allow"
   }
@@ -168,7 +168,8 @@ data "aws_iam_policy_document" "ecs_service_scaling" {
       "sns:Subscribe",
       "sns:Get*",
       "sns:List*", 
-      "codedeploy:*", 
+      "codedeploy:*",
+      "elasticloadbalancing:*", 
       "iam:*"
     ]
 
@@ -219,12 +220,8 @@ data "aws_iam_policy_document" "codedeploy" {
       "ecs:DeleteTaskSet",
       "ecs:DescribeServices",
       "ecs:UpdateServicePrimaryTaskSet",
-      "elasticloadbalancing:DescribeListeners",
-      "elasticloadbalancing:DescribeRules",
-      "elasticloadbalancing:DescribeTargetGroups",
-      "elasticloadbalancing:ModifyListener",
-      "elasticloadbalancing:ModifyRule",
       "lambda:InvokeFunction",
+      "elasticloadbalancing:*",
       "cloudwatch:DescribeAlarms",
       "sns:Publish",
       "s3:*",
@@ -280,6 +277,7 @@ data "aws_iam_policy_document" "execution_role" {
       "logs:CreateLogStream",
       "logs:PutLogEvents",
       "codedeploy:*",
+      "elasticloadbalancing:*",
       "iam:*"
     ]
 
