@@ -1,6 +1,7 @@
 resource "aws_alb" "main" {
   name            = "load-balancer"
   subnets         = aws_subnet.pub.*.id
+  internal = false
   security_groups = [aws_security_group.lb.id, aws_security_group.ecs_tasks.id]
 }
 
@@ -32,9 +33,9 @@ resource "aws_alb_target_group" "green" {
   target_type = "ip"
 
   health_check {
-    healthy_threshold   = "3"
-    interval            = "30"
-    protocol            = "HTTP"
+    healthy_threshold   = "4"
+    interval            = "60"
+    protocol            = "TCP"
     matcher             = "200-299"
     timeout             = "5"
     path                = var.health_check_path
@@ -49,7 +50,7 @@ resource "aws_alb_target_group" "green" {
 resource "aws_alb_listener" "blue" {
   load_balancer_arn = aws_alb.main.id
   port              = "80"
-  protocol          = "HTTP"
+  protocol          = "TCP"
 
   default_action {
     target_group_arn = aws_alb_target_group.blue.id
