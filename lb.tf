@@ -30,7 +30,7 @@ resource "aws_security_group" "alb_ecs_sg" {
 }
 
 resource "aws_security_group" "ecs_sg" {
-    vpc_id = module.networking.vpc_id
+    vpc_id = aws_vpc.main.vpc_id
     ingress {
         protocol         = "tcp"
         from_port        = "3000"
