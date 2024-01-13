@@ -62,7 +62,7 @@ resource "aws_ecs_service" "main" {
   }
 
   load_balancer {
-    target_group_arn = aws_alb_target_group.green.id
+    target_group_arn = aws_alb_target_group.bg[0].arn
     container_name   = var.image_repo_name
     container_port   = var.port
 
