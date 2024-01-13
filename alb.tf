@@ -10,7 +10,7 @@ resource "aws_alb_target_group" "blue" {
   port        = "80"
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
-  
+  target_type = "ip"
 
   health_check {
     healthy_threshold   = "3"
@@ -30,7 +30,7 @@ resource "aws_alb_target_group" "green" {
   port        = "80"
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
-  
+  target_type = "ip"
 
   health_check {
     healthy_threshold   = "4"
