@@ -8,6 +8,12 @@ resource "aws_codedeploy_deployment_group" "this" {
   deployment_group_name  = "${var.name}-service-deploy-group"
   deployment_config_name = "CodeDeployDefault.OneAtATime"
   service_role_arn       = "${aws_iam_role.codedeploy.arn}"
+  
+auto_rollback_configuration {
+    enabled = true
+    # type of the event trigerring rollback (DEPLOYMENT_STOP_ON_ALARM - if CloudWatch alarm is associated or DEPLOYMENT_FAILURE)
+    events = ["DEPLOYMENT_FAILURE"]
+  }
 
   blue_green_deployment_config {
     deployment_ready_option {
