@@ -9,6 +9,7 @@ Rails.application.configure do
   # config.hosts << /.*\.amazonaws\.com/
   # config.hosts << /[a-z0-9]+\.amazonaws\.com/
   config.hosts.clear
+  config.hosts << /.*\.amazonaws\.com/
   # config.hosts << /.*\.us-east-2.elb.amazonaws.com\.com/
   # config.hosts << "load-balancer-1647984890.us-east-2.elb.amazonaws.com"
   # Code is not reloaded between requests.
