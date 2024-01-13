@@ -14,7 +14,7 @@ resource "aws_security_group" "alb_ecs_sg" {
     vpc_id = aws_vpc.main.vpc_id
 
     ingress {
-        protocol         = "tcp"
+        protocol         = "HTTP"
         from_port        = "80"
         to_port          = "80"
         cidr_blocks      = ["0.0.0.0/0"]
@@ -22,7 +22,7 @@ resource "aws_security_group" "alb_ecs_sg" {
 
     ## Allow outbound to ecs instances in private subnet
     egress {
-        protocol    = "tcp"
+        protocol    = "HTTP"
         from_port   = local.target_port
         to_port     = local.target_port
         cidr_blocks = aws_subnet.pri[*].cidr_block
@@ -32,7 +32,7 @@ resource "aws_security_group" "alb_ecs_sg" {
 resource "aws_security_group" "ecs_sg" {
     vpc_id = aws_vpc.main.vpc_id
     ingress {
-        protocol         = "tcp"
+        protocol         = "HTTP"
         from_port        = "0"
         to_port          = "3000"
         security_groups  = [aws_security_group.alb_ecs_sg.id]
@@ -55,7 +55,7 @@ resource "aws_alb_target_group" "blue" {
   health_check {
     healthy_threshold   = "3"
     interval            = "30"
-    protocol            = "TCP"
+    protocol            = "HTTP"
     matcher             = "200-499"
     timeout             = "3"
     path                = var.health_check_path
