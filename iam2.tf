@@ -1,6 +1,6 @@
-data "aws_caller_identity" "current" {
+# data "aws_caller_identity" "current" {
 
-}
+# }
 resource "aws_iam_role" "role_to_assume" {
   name = "git-actions-role"
 

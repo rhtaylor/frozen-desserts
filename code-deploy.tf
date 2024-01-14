@@ -41,11 +41,11 @@ auto_rollback_configuration {
   load_balancer_info {
     target_group_pair_info {
       prod_traffic_route {
-        listener_arns = ["${aws_lb_listener.app.arn}"]
+        listener_arns = ["${aws_alb_listener.app.arn}"]
       }
 
      target_group {
-        name = "${aws_lb_target_group.app.name}"
+        name = "${aws_alb_target_group.app.name}"
      }
    
      
