@@ -73,7 +73,7 @@ resource "aws_codepipeline" "cicd_pipeline" {
       category         = "Source"
       owner            = "AWS"
       provider         = "CodeStarSourceConnection"
-      version          = "2"
+      version          = "1"
       output_artifacts = ["code"]
       configuration = {
         FullRepositoryId     = var.git_repo

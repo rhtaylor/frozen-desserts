@@ -15,10 +15,10 @@ resource "aws_ecs_task_definition" "app" {
 [
   {
     "name": "${var.image_repo_name}",
-    "image": "${jsondecode(data.aws_secretsmanager_secret_version.account_id.secret_string)["AWS_ACCOUNT_ID"]}.dkr.ecr.${var.region}.amazonaws.com/${var.image_repo_name}:${var.docker_tag}}",
-    "essential": "true",
+    "image": "${jsondecode(data.aws_secretsmanager_secret_version.account_id.secret_string)["AWS_ACCOUNT_ID"]}.dkr.ecr.${var.region}.amazonaws.com/${var.image_repo_name}:${var.docker_tag}",
+    "essential": true,
     "networkMode": "awsvpc",
-    "entryPoint": []
+    "entryPoint": [],
      "runtimePlatform": {
         "operatingSystemFamily": "LINUX"
     },
@@ -28,8 +28,8 @@ resource "aws_ecs_task_definition" "app" {
     "portMappings": [
       {  
         
-        "containerPort": "3000",
-        "hostPort": "3000"
+        "containerPort": 3000,
+        "hostPort": 3000
       }
     ],
     "logConfiguration": {
