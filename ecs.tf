@@ -59,13 +59,13 @@ resource "aws_ecs_service" "main" {
   force_new_deployment = true 
   scheduling_strategy = "REPLICA"
   network_configuration {
-    security_groups  = [aws_security_group.ecs_sg.id, aws_security_group.alb_ecs_sg.id]
+    security_groups  = [aws_security_group.ecs_tasks.id]
     subnets          = aws_subnet.pri.*.id
     assign_public_ip = true
   }
 
   load_balancer {
-    target_group_arn = aws_alb_target_group.green.arn
+    target_group_arn = aws_alb_target_group.app.arn
     container_name   = var.image_repo_name
     container_port   = var.port
 
@@ -74,5 +74,5 @@ resource "aws_ecs_service" "main" {
     type = "CODE_DEPLOY"
   }
 
-  depends_on = [aws_alb_listener.fargate, aws_iam_role_policy_attachment.ecs_task_execution_role]
+  depends_on = [aws_alb_listener.front_end, aws_iam_role_policy_attachment.ecs_task_execution_role]
 }

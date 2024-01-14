@@ -35,21 +35,19 @@ auto_rollback_configuration {
 
   deployment_style {
     deployment_option = "WITH_TRAFFIC_CONTROL"
-    deployment_type   = "BLUE_GREEN"
+    deployment_type   = "IN-PLACE"
   }
 
   load_balancer_info {
     target_group_pair_info {
       prod_traffic_route {
-        listener_arns = ["${aws_lb_listener.green.arn}"]
+        listener_arns = ["${aws_lb_listener.app.arn}"]
       }
 
      target_group {
-        name = "${aws_lb_target_group.fargate.name}"
+        name = "${aws_lb_target_group.app.name}"
      }
-      target_group {
-        name = "${aws_alb_target_group.main_test_blue_green.name}"
-     }
+   
      
     }
   }
