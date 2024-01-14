@@ -2,77 +2,113 @@ resource "aws_alb" "main" {
   name            = "load-balancer"
   subnets         = aws_subnet.pub.*.id
   internal = false
-  security_groups = [ aws_security_group.fargate.id]
-}
-
-locals {
-  target_port = 3000
-}
-
-resource "aws_lb_listener" "blue" {
-  load_balancer_arn = aws_alb.main.arn
-  port              = "80"
-  protocol          = "tcp"
-
-  default_action {
-    type             = "foward"
-    target_group_arn = aws_lb_target_group.fargate.arn
-  }
-}
-resource "aws_lb_listener" "green" {
-  load_balancer_arn = aws_alb.main.arn
-  port              = "80"
-  protocol          = "tcp"
-
-  default_action {
-    type             = "foward"
-    target_group_arn = aws_lb_target_group.fargate.arn
+  security_groups = [ aws_security_group.terraform-blue-green.id]
+ 
+   health_check {
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    timeout             = 3
+    target              = "HTTP:80/"
+    interval            = 30
   }
 }
 
-resource "aws_lb_target_group" "fargate" {
-  name        = "${var.name}-tg"
-  port        = "80"
-  protocol    = "tcp"
+
+resource "aws_security_group" "terraform-blue-green" {
+  description = "Terraform Blue/Green"
   vpc_id      = aws_vpc.main.id
-  target_type = "ip"
-}
+  name        = "terraform-blue-green-v${var.name}"
 
-resource "aws_security_group" "green" {
-  name        = "HTTP_Access"
-  description = "Allow HTTP/SSH inbound traffic"
-  vpc_id      = aws_vpc.main.id
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 3000
-    to_port     = 3000
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+  tags {
+    Name = "Terraform Blue/Green"
   }
 }
 
-# // AWS ELB Target Blue groups/Listener for Blue/Green Deployments
-resource "aws_lb_target_group" "blue" {
-  name        = "${var.name}-blue"
-  port        = 80
-  protocol    = "TCP"
-  target_type = "ip"
-  vpc_id      = aws_vpc.main.vpc_id
+resource "aws_security_group_rule" "terraform-blue-green-inbound" {
+  type              = "ingress"
+  security_group_id = "${aws_security_group.terraform-blue-green.id}"
+  from_port         = -1
+  to_port           = 0
+  protocol          = "-1"
+
+  cidr_blocks = ["0.0.0.0/0"]
 }
+
+resource "aws_security_group_rule" "terraform-blue-green-outbound" {
+  type              = "egress"
+  security_group_id = "${aws_security_group.terraform-blue-green.id}"
+  from_port         = -1
+  to_port           = 0
+  protocol          = "-1"
+
+  cidr_blocks = ["0.0.0.0/0"]
+}
+
+
+# resource "aws_lb_listener" "blue" {
+#   load_balancer_arn = aws_alb.main.arn
+#   port              = "80"
+#   protocol          = "tcp"
+
+#   default_action {
+#     type             = "foward"
+#     target_group_arn = aws_lb_target_group.fargate.arn
+#   }
+# }
+# resource "aws_lb_listener" "green" {
+#   load_balancer_arn = aws_alb.main.arn
+#   port              = "80"
+#   protocol          = "tcp"
+
+#   default_action {
+#     type             = "foward"
+#     target_group_arn = aws_lb_target_group.fargate.arn
+#   }
+# }
+
+# resource "aws_lb_target_group" "fargate" {
+#   name        = "${var.name}-tg"
+#   port        = "80"
+#   protocol    = "tcp"
+#   vpc_id      = aws_vpc.main.id
+#   target_type = "ip"
+# }
+
+# resource "aws_security_group" "green" {
+#   name        = "HTTP_Access"
+#   description = "Allow HTTP/SSH inbound traffic"
+#   vpc_id      = aws_vpc.main.id
+
+#   ingress {
+#     from_port   = 80
+#     to_port     = 80
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+
+#   ingress {
+#     from_port   = 3000
+#     to_port     = 3000
+#     protocol    = "tcp"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+
+#   egress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+# }
+
+# # // AWS ELB Target Blue groups/Listener for Blue/Green Deployments
+# resource "aws_lb_target_group" "blue" {
+#   name        = "${var.name}-blue"
+#   port        = 80
+#   protocol    = "TCP"
+#   target_type = "ip"
+#   vpc_id      = aws_vpc.main.vpc_id
+# }
 
 # // AWS ELB Target Green groups/Listener for Blue/Green Deployments
 # resource "aws_lb_target_group" "green" {
