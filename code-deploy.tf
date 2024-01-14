@@ -35,7 +35,7 @@ auto_rollback_configuration {
 
   deployment_style {
     deployment_option = "WITH_TRAFFIC_CONTROL"
-    deployment_type   = "IN-PLACE"
+    deployment_type   = "IN_PLACE"
   }
 
   load_balancer_info {
