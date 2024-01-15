@@ -62,7 +62,7 @@ environment_variable{
     }
     environment_variable{
       name ="SECURITYGROUPS"
-      value = aws_security_group.ecs_tasks.id
+      value = aws_security_group.lb.id
     }
     environment_variable{
       name ="PUBSUBNET"
