@@ -264,16 +264,15 @@ data "aws_iam_policy_document" "execution_role" {
     effect = "Allow"
 
     actions = [
-      "ecr:GetAuthorizationToken",
-      "ecr:BatchCheckLayerAvailability",
-      "ecr:GetDownloadUrlForLayer",
-      "ecr:BatchGetImage",
+      "application-autoscaling:*",
+      "ecr:*",
       "logs:CreateLogStream",
       "logs:PutLogEvents",
       "codedeploy:*",
       "elasticloadbalancing:*",
       "iam:*",
-      "ecs:*"
+      "ecs:*",
+      "s3:*"
 
     ]
 
