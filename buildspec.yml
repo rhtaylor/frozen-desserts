@@ -30,6 +30,9 @@ phases:
     - sed -i 's/<SUBNET1>/'$SUBNET1'/g' appspec.yml
     - sed -i 's/<SUBNET2>/'$SUBNET2'/g' appspec.yml
     - sed -i 's/<SECURITYGROUPS>/'$SECURITYGROUPS'/g' appspec.yml
+    - sed -i 's/<PUBSUBNET>/'$PUBSUBNET'/g' appspec.yml
+    - sed -i 's/<PUBSUBNET1>/'$PUBSUBNET1'/g' appspec.yml
+    - sed -i 's/<PUBSUBNET2>/'$PUBSUBNET2'/g' appspec.yml
 artifacts:
   files: 
     - appspec.yml

@@ -64,6 +64,18 @@ environment_variable{
       name ="SECURITYGROUPS"
       value = aws_security_group.ecs_tasks.id
     }
+    environment_variable{
+      name ="PUBSUBNET"
+      value = aws_subnet.pub[0].id
+    }
+     environment_variable{
+      name ="PUBSUBNET1"
+      value = aws_subnet.pub[1].id
+    }
+    environment_variable{
+      name ="PUBSUBNET2"
+      value = aws_subnet.pub[2].id
+    }
   }
 
   source {
