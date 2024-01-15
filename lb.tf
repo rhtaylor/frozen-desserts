@@ -13,7 +13,7 @@ resource "aws_security_group" "lb" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    protocol    = "tcp"
+    protocol    = "http"
     from_port   = 3000
     to_port     = 3000
     cidr_blocks = ["0.0.0.0/0"]
@@ -39,7 +39,7 @@ resource "aws_security_group" "ecs_tasks" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    protocol        = "tcp"
+    protocol        = "http"
     from_port       = 3000
     to_port         = 3000
     security_groups = [aws_security_group.lb.id]
@@ -58,7 +58,7 @@ resource "aws_alb_target_group" "app" {
   port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
-  target_type = "ip"
+  # target_type = "ip"
 
   health_check {
     healthy_threshold   = "3"
@@ -87,7 +87,7 @@ resource "aws_alb_target_group" "app2" {
   port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
-  target_type = "ip"
+  # target_type = "ip"
 
   health_check {
     healthy_threshold   = "3"
