@@ -2,6 +2,8 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  req = ActionDispatch::Request.new
+  puts req.host
   config.hosts.clear
   config.hosts << ".amazonaws.com"
   config.hosts <<  /.*\.amazonaws\.com/
