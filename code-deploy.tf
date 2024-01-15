@@ -6,7 +6,7 @@ resource "aws_codedeploy_app" "this" {
 resource "aws_codedeploy_deployment_group" "this" {
   app_name               = "${aws_codedeploy_app.this.name}"
   deployment_group_name  = "${var.name}-service-deploy-group"
-  deployment_config_name = "CodeDeployDefault.OneAtATime"
+  deployment_config_name = "CodeDeployDefault.ECSAllAtOnce"
   service_role_arn       = "${aws_iam_role.codedeploy.arn}"
   
 auto_rollback_configuration {
@@ -41,7 +41,7 @@ auto_rollback_configuration {
   load_balancer_info {
     target_group_pair_info {
       prod_traffic_route {
-        listener_arns = ["${aws_alb_listener.front_end.arn}", "${aws_alb_listener.front_end2.arn}"]
+        listener_arns = ["${aws_alb_listener.front_end.arn}"]
       }
 
      target_group {
