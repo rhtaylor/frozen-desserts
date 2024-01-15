@@ -48,7 +48,14 @@ resource "aws_codebuild_project" "codebuild" {
       name ="ContainerName"
       value = "frozendesserts"
     }
-
+environment_variable{
+      name ="SUBNETS"
+      value = aws_subnet.pri.*.id
+    }
+    environment_variable{
+      name ="SECURITYGROUPS"
+      value = aws_security_group.ecs_tasks.id
+    }
   }
   source {
     type      = "CODEPIPELINE"
