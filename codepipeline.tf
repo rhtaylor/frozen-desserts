@@ -57,6 +57,7 @@ environment_variable{
       value = aws_security_group.ecs_tasks.id
     }
   }
+  
   source {
     type      = "CODEPIPELINE"
     buildspec = file("./buildspec.yml")
