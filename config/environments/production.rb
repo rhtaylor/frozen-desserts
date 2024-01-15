@@ -5,6 +5,7 @@ Rails.application.configure do
   req = ActionDispatch::Request.new
   puts req.host
   config.hosts.clear
+  config.hosts << req.host
   config.hosts << ".amazonaws.com"
   config.hosts <<  /.*\.amazonaws\.com/
   config.hosts <<  /.*\.elb.amazonaws\.com/
