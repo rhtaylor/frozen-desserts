@@ -84,7 +84,7 @@ resource "aws_alb_listener" "front_end" {
 
 resource "aws_alb_target_group" "app2" {
   name        = "${var.name}-target-group-app2"
-  port        = 80
+  port        = 3000
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
