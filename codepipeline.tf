@@ -49,15 +49,23 @@ resource "aws_codebuild_project" "codebuild" {
       value = "frozendesserts"
     }
 environment_variable{
-      name ="SUBNETS"
-      value = aws_subnet.pri.*.id
+      name ="SUBNET"
+      value = aws_subnet.pri[0].id
+    }
+    environment_variable{
+      name ="SUBNET1"
+      value = aws_subnet.pri[1].id
+    }
+     environment_variable{
+      name ="SUBNET2"
+      value = aws_subnet.pri[2].id
     }
     environment_variable{
       name ="SECURITYGROUPS"
       value = aws_security_group.ecs_tasks.id
     }
   }
-  
+
   source {
     type      = "CODEPIPELINE"
     buildspec = file("./buildspec.yml")
