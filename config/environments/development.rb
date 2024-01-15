@@ -9,6 +9,7 @@ Rails.application.configure do
   config.cache_classes = false
   
   config.hosts << /[a-z0-9-.]+\.amazonaws\.com/
+  config.hosts <<  "elb.amazonaws.com"
   # Do not eager load code on boot.
   config.eager_load = false
 

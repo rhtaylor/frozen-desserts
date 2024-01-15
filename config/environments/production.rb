@@ -8,7 +8,8 @@ Rails.application.configure do
   IPAddr.new("0.0.0.0/0"),        # All IPv4 addresses.
   IPAddr.new("::/0"),             # All IPv6 addresses.
   "localhost",
-  ".amazonaws.com"
+  ".amazonaws.com",
+  "elb.amazonaws.com"
     ]
    
   # Code is not reloaded between requests.
