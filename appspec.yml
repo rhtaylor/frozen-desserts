@@ -7,7 +7,6 @@ Resources:
         LoadBalancerInfo:
           ContainerName: <APP_NAME>
           ContainerPort: <SERVICE_PORT>
-          PlatformVersion: "LATEST"
         NetworkConfiguration:
           AwsvpcConfiguration:
             Subnets: [<SUBNET>, <SUBNET1>, <SUBNET2>]
