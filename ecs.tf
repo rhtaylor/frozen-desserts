@@ -18,7 +18,7 @@ resource "aws_ecs_task_definition" "app" {
     "image": "${jsondecode(data.aws_secretsmanager_secret_version.account_id.secret_string)["AWS_ACCOUNT_ID"]}.dkr.ecr.${var.region}.amazonaws.com/${var.image_repo_name}:${var.docker_tag}",
     "essential": true,
     "networkMode": "awsvpc",
-    "entryPoint": [],
+    "privileged" :true,
      "runtimePlatform": {
         "operatingSystemFamily": "LINUX"
     },
