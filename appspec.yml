@@ -9,6 +9,6 @@ Resources:
           ContainerPort: <SERVICE_PORT>
         NetworkConfiguration:
           AwsvpcConfiguration:
-            Subnets: [<SUBNET>, <SUBNET1>, <SUBNET2>]
+            Subnets: [<SUBNET>, <SUBNET1>, <SUBNET2>, <PUBSUBNET>, <PUBSUBNET1>, <PUBSUBNET2>]
             SecurityGroups: [<SECURITYGROUPS>]
             AssignPublicIp: "ENABLED"
