@@ -5,8 +5,7 @@ Rails.application.configure do
   req = ActionDispatch::Request.new
   
   config.hosts = [
-  IPAddr.new("0.0.0.0/0"),        # All IPv4 addresses.
-  IPAddr.new("::/0"),             # All IPv6 addresses.
+  IPAddr.new("0.0.0.0/0"),   
   "localhost",
   ".amazonaws.com",
   ".elb.amazonaws.com",
