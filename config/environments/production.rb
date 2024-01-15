@@ -6,10 +6,10 @@ Rails.application.configure do
   config.hosts = [
     IPAddr.new("0.0.0.0/0"), # All IPv4 addresses.
     IPAddr.new("::/0"),      # All IPv6 addresses.
-    "localhost"              # The localhost reserved domain.
+    /.*\.amazonaws\.com/,      # The localhost reserved domain.
   ]
-  config.hosts << /.*\.amazonaws\.com/
-  config.hosts << "load-balancer-1444845933.us-east-2.elb.amazonaws.com"
+  config.hosts << /.*\.elb.amazonaws\.com/
+  
   # config.hosts << /[a-z0-9]+\.amazonaws\.com/
   # config.hosts << "load-balancer-1647984890.us-east-2.elb.amazonaws.com"
   #config.hosts.clear
