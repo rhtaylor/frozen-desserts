@@ -3,11 +3,11 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   req = ActionDispatch::Request.new
-  config.hosts.clear
-  config.hosts << req.host
-  config.hosts << ".amazonaws.com"
-  config.hosts <<  /.*\.amazonaws\.com/
-  config.hosts <<  /.*\.elb.amazonaws\.com/
+  config.hosts = [
+  IPAddr.new("0.0.0.0/0"),        # All IPv4 addresses.
+  IPAddr.new("::/0"),             # All IPv6 addresses.
+  "localhost",
+    ]
   # Code is not reloaded between requests.
   config.cache_classes = true
 
