@@ -4,5 +4,6 @@ Resources:
       Type: AWS::ECS::Service
       Properties:
         TaskDefinition: <TASK_DEFINITION>
-          ContainerName: "<APP_NAME>"
+        LoadBalancerInfo:
+          ContainerName: <APP_NAME>
           ContainerPort: <SERVICE_PORT>
