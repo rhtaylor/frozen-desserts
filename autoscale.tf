@@ -74,7 +74,7 @@ resource "aws_cloudwatch_metric_alarm" "service_cpu_high" {
 resource "aws_cloudwatch_metric_alarm" "service_cpu_low" {
   alarm_name          = "cpu_utilization_low"
   comparison_operator = "LessThanOrEqualToThreshold"
-  evaluation_periods  = "2"
+  evaluation_periods  = "4"
   metric_name         = "CPUUtilization"
   namespace           = "AWS/ECS"
   period              = "60"
