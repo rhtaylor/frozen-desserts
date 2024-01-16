@@ -4,13 +4,9 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   req = ActionDispatch::Request.new
   
-  config.hosts = [
-  IPAddr.new("0.0.0.0/0"),   
-  "localhost",
-  ".amazonaws.com",
-  ".elb.amazonaws.com",
-  /.*\.amazonaws\.com/
-    ]
+  config.hosts << /[a-z0-9-.]+\.amazonaws\.com/
+  config.hosts <<  "elb.amazonaws.com"
+  config.hosts << /.*\.amazonaws\.com/
 
   # Code is not reloaded between requests.
   config.cache_classes = true
