@@ -6,8 +6,9 @@ FROM ruby:$RUBY_VERSION
 RUN apt-get update -qq && \
     apt-get install -y build-essential libvips && \
     apt-get clean && \
+    apt-get install -y yarn \
     rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
-RUN npm install -g yarn
+
 RUN gem install bundler
 
 # Rails app lives here
