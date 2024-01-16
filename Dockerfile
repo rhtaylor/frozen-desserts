@@ -4,10 +4,10 @@ FROM ruby:$RUBY_VERSION
 
 # Install libvips for Active Storage preview support
 RUN apt-get update -qq && \
-    apt-get install yarn \
     apt-get install -y build-essential libvips && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
+RUN npm install -g yarn
 RUN gem install bundler
 
 # Rails app lives here
