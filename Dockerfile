@@ -7,7 +7,9 @@ RUN apt-get update -qq && \
     apt-get install -y build-essential libvips && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
-
+RUN gem install bundler
+RUN bundle install
+RUN yarn install
 # Rails app lives here
 WORKDIR /rails
 
