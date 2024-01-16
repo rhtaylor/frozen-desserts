@@ -8,7 +8,7 @@
         "memoryReservation": <MEMORY>,
         "portMappings": [
           {
-            "hostPort": 0,
+            "hostPort": <SERVICE_PORT>,
             "protocol": "tcp",
             "containerPort": <SERVICE_PORT>
           }
