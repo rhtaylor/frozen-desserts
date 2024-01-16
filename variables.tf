@@ -73,7 +73,7 @@ variable "port" {
   type        = number
   description = "Port Docker image exposes to traffic."
   #update to 443 for encryption
-  default = "3000"
+  default = 3000
 }
 
 variable "app_count" {
@@ -91,7 +91,7 @@ variable "health_check_path" {
 variable "fargate_cpu" {
   type        = string
   description = "CPU to provision for Fargate instances."
-  default     = "1024"
+  default     = 1024
 }
 
 variable "fargate_memory" {
