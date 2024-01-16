@@ -15,7 +15,7 @@ RUN gem install bundler
 RUN mkdir /rails
 COPY . /rails
 WORKDIR /rails
-RUN bundle install
+
 
 # Set production environment
 ENV RAILS_LOG_TO_STDOUT="1" \
