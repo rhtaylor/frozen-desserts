@@ -9,8 +9,9 @@ Rails.application.configure do
   "localhost",
   ".amazonaws.com",
   ".elb.amazonaws.com",
+  /.*\.amazonaws\.com/
     ]
-  config.hosts << /.*\.amazonaws\.com/
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
