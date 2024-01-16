@@ -11,7 +11,7 @@ Rails.application.configure do
   config.hosts << /[a-z0-9-.]+\.amazonaws\.com/
   config.hosts <<  "elb.amazonaws.com"
   config.hosts << /.*\.amazonaws\.com/
-  config.host_authorization = { exclude: ->(request) { request.path =~ /healthcheck/ } }
+  # config.host_authorization = { exclude: ->(request) { request.path =~ /healthcheck/ } }
   # Do not eager load code on boot.
   config.eager_load = false
 
