@@ -16,7 +16,7 @@ RUN mkdir /rails
 COPY . /rails
 WORKDIR /rails
 RUN bundle install
-RUN yarn install
+
 # Set production environment
 ENV RAILS_LOG_TO_STDOUT="1" \
     RAILS_SERVE_STATIC_FILES="true" \
