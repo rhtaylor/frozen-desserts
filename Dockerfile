@@ -1,29 +1,38 @@
-FROM ruby:3.2.1
+# Make sure it matches the Ruby version in .ruby-version and Gemfile
+ARG RUBY_VERSION=3.2.0
+FROM ruby:$RUBY_VERSION
 
-ENV PATH /root/.yarn/bin:$PATH
-ARG build_without
-ARG rails_env
-RUN apt-get update -qq && apt-get install -y binutils curl git gnupg cmake python python-dev postgresql-client supervisor tar tzdata
-RUN apt-get install -y apt-transport-https apt-utils
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update && apt-get install -y yarn
-RUN mkdir /rails_terraform_docker
-COPY . /rails_terraform_docker
-WORKDIR /rails_terraform_docker
-RUN gem install bundler
+# Install libvips for Active Storage preview support
+RUN apt-get update -qq && \
+    apt-get install -y build-essential libvips && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man
+
+# Rails app lives here
+WORKDIR /rails
+
+# Set production environment
+ENV RAILS_LOG_TO_STDOUT="1" \
+    RAILS_SERVE_STATIC_FILES="true" \
+    RAILS_ENV="production" \
+    BUNDLE_WITHOUT="development"
+
+# Install application gems
+COPY Gemfile Gemfile.lock ./
 RUN bundle install
-RUN yarn install
-RUN rails db:migrate
-RUN RAILS_ENV=production NODE_ENV=production bundle exec rake assets:precompile
-# # Add a script to be executed every time the container starts.
 
+# Copy application code
+COPY . .
 
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile --gemfile app/ lib/
+
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
+
+# Entrypoint prepares the database.
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+# Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-# Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0" "-p", "3000", ]
-
-
-##docker run -d --name ror -p 3000:3000 <image>
-
+CMD ["./bin/rails", "server", "3000", "-b", "0.0.0.0/0"]
