@@ -37,6 +37,10 @@ resource "aws_codebuild_project" "codebuild" {
       value = var.image_repo_name
     }
     environment_variable {
+      name  = "CPU"
+      value = var.fargate_cpu
+    }
+    environment_variable {
       name = "SERVICE_PORT"
       value = var.port
     }
