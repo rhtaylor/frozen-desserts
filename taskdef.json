@@ -5,7 +5,6 @@
       "name": "<APP_NAME>",
       "image": "<IMAGE_NAME>",
       "essential": true,
-     
       "portMappings": [
         {
           "hostPort": <SERVICE_PORT>,
