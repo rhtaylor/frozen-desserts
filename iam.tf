@@ -176,7 +176,7 @@ data "aws_iam_policy_document" "ecs_service_scaling" {
   }
 }
 resource "aws_iam_policy" "ecs_service_scaling" {
-  name        = "dev-to-scaling"
+  name        = "${var.name}-to-scaling"
   path        = "/"
   description = "Allow ecs service scaling"
   policy      = data.aws_iam_policy_document.ecs_service_scaling.json
