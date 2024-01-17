@@ -345,6 +345,7 @@ data "aws_iam_policy_document" "pipeline_service" {
       "secretsmanager:*",
       "iam:*",
       "ecr:*",
+      "ecs:*",
       "application-autoscaling:*",
       "cloudwatch:*",
       "sts:*",
