@@ -1,30 +1,37 @@
-# Use an official Ruby runtime as a parent image
-FROM ruby:3.2.1
+FROM ruby:3.2.1-slim-bookworm AS app
 
-# Set the working directory
+
 WORKDIR /app
 
-# Install dependencies
-RUN apt-get update && \
-    apt-get install -y \
-    build-essential \
-    nodejs \
-    postgresql-client && \
-    rm -rf /var/lib/apt/lists/*
+ARG UID=1000
+ARG GID=1000
 
-# Install gems
-COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && \
-    bundle install --jobs 4
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
+  && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
+  && apt-get clean \
+  && groupadd -g "${GID}" ruby \
+  && useradd --create-home --no-log-init -u "${UID}" -g "${GID}" ruby \
+  && chown ruby:ruby -R /app
 
-# Copy the application code
-COPY . .
+USER ruby
 
-# create/migrate db
-RUN rails db:create
-RUN rails db:migrate RAILS_ENV=production
-# Expose ports
-EXPOSE 3000
+COPY --chown=ruby:ruby bin/ ./bin
+RUN chmod 0755 bin/*
 
-# Set the entrypoint command
-CMD ["rails", "server", "-b", "0.0.0.0"]
+ARG RAILS_ENV="production"
+ENV RAILS_ENV="${RAILS_ENV}" \
+    PATH="${PATH}:/home/ruby/.local/bin" \
+    USER="ruby"
+
+COPY --chown=ruby:ruby --from=assets /usr/local/bundle /usr/local/bundle
+COPY --chown=ruby:ruby --from=assets /app/public /public
+COPY --chown=ruby:ruby . .
+
+RUN /bin rake db:create
+
+ENTRYPOINT ["/app/bin/docker-entrypoint-web"]
+
+EXPOSE 8000
+
+CMD ["rails", "s"]
