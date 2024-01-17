@@ -22,7 +22,7 @@ COPY . .
 
 # create/migrate db
 RUN bin/rails db:create
-RUN rails db:migrate RAILS_ENV=production
+RUN bin/rails db:migrate RAILS_ENV=production
 # Expose ports
 EXPOSE 3000
 
