@@ -17,7 +17,7 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && \
     bundle install --jobs 4
 
-RUN bundle exec rake db:migrate
+RUN rake db:migrate
 # Copy the application code
 COPY . .
 
