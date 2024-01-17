@@ -1,19 +1,29 @@
-FROM ruby:3.2.1-bullseye as base
+FROM ruby:3.2.1
 
-RUN apt-get update -qq && apt-get install -y build-essential apt-utils libpq-dev nodejs
-
-WORKDIR /docker/app
-
+ENV PATH /root/.yarn/bin:$PATH
+ARG build_without
+ARG rails_env
+RUN apt-get update -qq && apt-get install -y binutils curl git gnupg cmake python python-dev postgresql-client supervisor tar tzdata
+RUN apt-get install -y apt-transport-https apt-utils
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install -y yarn
+RUN mkdir /rails_terraform_docker
+COPY . /rails_terraform_docker
+WORKDIR /rails_terraform_docker
 RUN gem install bundler
-
-COPY Gemfile* ./
-
 RUN bundle install
+RUN yarn install
+RUN rails db:migrate
+RUN RAILS_ENV=production NODE_ENV=production bundle exec rake assets:precompile
+# # Add a script to be executed every time the container starts.
 
-ADD . /docker/app
 
-ARG DEFAULT_PORT 3000
-
-EXPOSE ${DEFAULT_PORT}
+EXPOSE 3000
+# Start the main process.
 CMD ["rails", "server", "-b", "0.0.0.0" "-p", "3000", ]
-#CMD [ "bundle","exec", "puma", "config.ru"] # CMD ["rails","server"] # you can also write like this.
+
+
+##docker run -d --name ror -p 3000:3000 <image>
+
