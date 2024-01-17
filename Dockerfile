@@ -1,37 +1,22 @@
-FROM ruby:3.2-bullseye AS app
+FROM ruby:2.3
 
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-WORKDIR /app
+RUN apt-get update && apt-get install -y nodejs mysql-client postgresql-client sqlite3 vim --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-ARG UID=1000
-ARG GID=1000
+ENV RAILS_ENV production
+ENV RAILS_SERVE_STATIC_FILES true
+ENV RAILS_LOG_TO_STDOUT true
 
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends build-essential curl libpq-dev \
-  && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
-  && apt-get clean \
-  && groupadd -g "${GID}" ruby \
-  && useradd --create-home --no-log-init -u "${UID}" -g "${GID}" ruby \
-  && chown ruby:ruby -R /app
+COPY Gemfile /usr/src/app/
+COPY Gemfile.lock /usr/src/app/
+RUN bundle config --global frozen 1
+RUN bundle install --without development test
 
-USER ruby
+COPY . /usr/src/app
+RUN bundle exec rake db:create && bundle exec rake db:migrate
+RUN bundle exec rake DATABASE_URL=postgresql:does_not_exist assets:precompile
 
-COPY --chown=ruby:ruby bin/ ./bin
-RUN chmod 0755 bin/*
-
-ARG RAILS_ENV="production"
-ENV RAILS_ENV="${RAILS_ENV}" \
-    PATH="${PATH}:/home/ruby/.local/bin" \
-    USER="ruby"
-
-COPY --chown=ruby:ruby --from=assets /usr/local/bundle /usr/local/bundle
-COPY --chown=ruby:ruby --from=assets /app/public /public
-COPY --chown=ruby:ruby . .
-
-RUN /bin rake db:create
-
-ENTRYPOINT ["/app/bin/docker-entrypoint-web"]
-
-EXPOSE 8000
-
-CMD ["rails", "s"]
+EXPOSE 3000
+CMD ['rails', 'server', '-b', '0.0.0.0']
