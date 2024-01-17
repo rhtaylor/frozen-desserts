@@ -21,8 +21,8 @@ RUN gem install bundler && \
 COPY . .
 
 # create/migrate db
-RUN rails db:create
-RUN rails db:migrate RAILS_ENV=production
+RUN /app/bin/rake db:create
+RUN /app/bin/rake db:migrate RAILS_ENV=production
 # Expose ports
 EXPOSE 3000
 
