@@ -1,34 +1,25 @@
 {
-    "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<APP_NAME>_ecsTaskExecutionRole",
-    "containerDefinitions": [
-      {
-        "name": "<APP_NAME>",
-        "image": "<IMAGE_NAME>",
-        "essential": true,
-        "memoryReservation": <MEMORY>,
-        "portMappings": [
-          {
-            "hostPort": <SERVICE_PORT>,
-            "protocol": "tcp",
-            "containerPort": <SERVICE_PORT>
-          }
-        ],
-        "cpu": <CPU>,
-        "environment": [
-          {
-            "name": "PORT",
-            "value": <SERVICE_PORT>
-          },
-          {
-            "name": "APP_NAME",
-            "value": "<APP_NAME>"
-          }
-        ]
-      }
-    ],
-    "requiresCompatibilities": [
+  "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<APP_NAME>_ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "<APP_NAME>",
+      "image": "<IMAGE_NAME>",
+      "essential": true,
+     
+      "portMappings": [
+        {
+          "hostPort": <SERVICE_PORT>,
+          "protocol": "tcp",
+          "containerPort": <SERVICE_PORT>
+        }
+      ]
+    }
+  ],
+  "requiresCompatibilities": [
       "FARGATE" 
-    ],
-    "networkMode": "awsvpc",
-    "family": "<APP_NAME>"
-  }
+  ],
+  "cpu": "<CPU>",
+  "memory": "<MEMORY>",
+  "networkMode": "awsvpc",
+  "family": "<APP_NAME>"
+}
