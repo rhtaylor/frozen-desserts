@@ -63,6 +63,8 @@ jobs:
           run: |
              cd rhtaylor/frozen-desserts
              terraform init
+             terraform refresh
+             terraform state list
              terraform destroy --auto-approve
             #  terraform fmt
             #  terraform validate
