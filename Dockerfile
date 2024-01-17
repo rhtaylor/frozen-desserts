@@ -1,4 +1,4 @@
-FROM ruby:3.2-alpine3.16
+FROM ruby:3.2.1
 WORKDIR /app
 COPY . .
 RUN apk add --no-cache build-base tzdata nodejs yarn sqlite-dev
