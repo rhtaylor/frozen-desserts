@@ -1,22 +1,80 @@
-FROM ruby:2.3
+ARG RUBY_VERSION=3.2.1
+FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# Rails app lives here
+WORKDIR /rails
 
-RUN apt-get update && apt-get install -y nodejs mysql-client postgresql-client sqlite3 vim --no-install-recommends && rm -rf /var/lib/apt/lists/*
+# Set production environment
+ENV RAILS_ENV="production" \
+    BUNDLE_WITHOUT="development:test" \
+    BUNDLE_DEPLOYMENT="1"
 
-ENV RAILS_ENV production
-ENV RAILS_SERVE_STATIC_FILES true
-ENV RAILS_LOG_TO_STDOUT true
+# Update gems and bundler
+RUN gem update --system --no-document && \
+    gem install -N bundler
 
-COPY Gemfile /usr/src/app/
-COPY Gemfile.lock /usr/src/app/
-RUN bundle config --global frozen 1
-RUN bundle install --without development test
 
-COPY . /usr/src/app
-RUN bundle exec rake db:create && bundle exec rake db:migrate
-RUN bundle exec rake DATABASE_URL=postgresql:does_not_exist assets:precompile
+# Throw-away build stage to reduce size of final image
+FROM base as build
 
+# Install packages needed to build gems and node modules
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential curl libmariadb-dev default-libmysqlclient-dev libvips node-gyp pkg-config python
+
+# Install JavaScript dependencies
+ARG NODE_VERSION=16.16.0
+ARG YARN_VERSION=1.22.19
+ENV PATH=/usr/local/node/bin:$PATH
+RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+    npm install -g yarn@$YARN_VERSION && \
+    rm -rf /tmp/node-build-master
+
+# Install application gems
+COPY --link Gemfile Gemfile.lock ./
+RUN bundle install && \
+    bundle exec bootsnap precompile --gemfile && \
+    rm -rf ~/.bundle/ $BUNDLE_PATH/ruby/*/cache $BUNDLE_PATH/ruby/*/bundler/gems/*/.git
+
+# Install node modules
+COPY --link package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+
+# Copy application code
+COPY --link . .
+
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/
+
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
+
+
+# Final stage for app image
+FROM base
+
+# Install packages needed for deployment
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y curl default-mysql-client default-libmysqlclient-dev imagemagick libvips && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Copy built artifacts: gems, application
+COPY --from=build /usr/local/bundle /usr/local/bundle
+COPY --from=build /rails /rails
+
+# Run and own only the runtime files as a non-root user for security
+ARG UID=1000 \
+    GID=1000
+RUN groupadd -f -g $GID rails && \
+    useradd -u $UID -g $GID rails --create-home --shell /bin/bash && \
+    chown -R rails:rails db log tmp
+USER rails:rails
+
+# Deployment options
+ENV RAILS_LOG_TO_STDOUT="1" \
+    RAILS_SERVE_STATIC_FILES="true"
+RUN rails db:create
+RUN rails db:migrate
+# Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ['rails', 'server', '-b', '0.0.0.0']
+CMD ["./bin/rails", "server"]
