@@ -16,8 +16,8 @@ RUN apt-get update && \
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && \
     bundle install --jobs 4
-    
-RUN rails db:migrate
+
+RUN bundle exec rake db:migrate
 # Copy the application code
 COPY . .
 
