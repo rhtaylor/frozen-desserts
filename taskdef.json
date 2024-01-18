@@ -6,12 +6,11 @@
       "image": "<IMAGE_NAME>",
       "essential": true,
       "portMappings": [
-        {  "protocol": "tcp",
-          "hostPort": <SERVICE_PORT> ,
-          "containerPort": <SERVICE_PORT>
+        {
+            "hostPort": <SERVICE_PORT>,
+            "containerPort": <SERVICE_PORT>,
+            "protocol": "tcp"
         }
-      ]
-    }
   ],
   "requiresCompatibilities": [
       "FARGATE" 
