@@ -64,9 +64,10 @@ jobs:
              cd rhtaylor/frozen-desserts
              aws sts get-caller-identity
              terraform init
-             terraform refresh
-             terraform state list
-             terraform fmt
-             terraform validate
-             terraform apply --auto-approve
+             terraform destroy --auto-approve
+            #  terraform refresh
+            #  terraform state list
+            #  terraform fmt
+            #  terraform validate
+            #  terraform apply --auto-approve
 
