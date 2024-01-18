@@ -20,10 +20,10 @@ phases:
     commands:
     - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
     - docker push $ECR_REPOSITORY_URI:$IMAGE_TAG
-    - printf '{"ImageURI":"%s"}' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG  > imageDetail.json
     - sed -i 's/<APP_NAME>/'$IMAGE_REPO_NAME'/g' appspec.yml taskdef.json
     - sed -i 's/<SERVICE_PORT>/'$SERVICE_PORT'/g' appspec.yml taskdef.json
     - sed -i 's/<AWS_ACCOUNT_ID>/'$AWS_ACCOUNT_ID'/g' taskdef.json
+    - sed -i 's/<APP_NAME>/'$IMAGE_REPO_NAME'/g' appspec.yml
     - sed -i 's/<MEMORY>/'$MEMORY'/g' taskdef.json
     - sed -i 's/<CPU>/'$CPU'/g' taskdef.json
     - sed -i 's/<IMAGE_NAME>/'$AWS_ACCOUNT_ID'\.dkr\.ecr\.'$AWS_DEFAULT_REGION'\.amazonaws.com\/'$IMAGE_REPO_NAME'\:'$IMAGE_TAG'/g' taskdef.json
