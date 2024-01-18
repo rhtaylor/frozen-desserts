@@ -7,7 +7,7 @@
       "essential": true,
       "portMappings": [
         {
-          "hostPort": <SERVICE_PORT>,
+          "hostPort": "<SERVICE_PORT>",
           "protocol": "tcp",
           "containerPort": <SERVICE_PORT>
         }
