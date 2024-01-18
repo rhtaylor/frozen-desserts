@@ -97,7 +97,7 @@ variable "fargate_cpu" {
 variable "fargate_memory" {
   type        = string
   description = "Fargate instance memory to provision."
-  default     = "2048"
+  default     = 2048
 }
 
 variable "main_cidr" {
