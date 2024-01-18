@@ -33,7 +33,8 @@ data "aws_iam_policy_document" "cicd-pipeline-policies" {
   }
   statement {
     sid       = ""
-    actions   = ["cloudwatch:*", "s3:*", "codebuild:*", "ecr:*", "codedeploy:*", "ecs:*", "iam:*", "codedeploy:*", "elasticloadbalancing:*",  ]
+    actions   = ["cloudwatch:*", "s3:*", "codebuild:*", "ecr:*", "codedeploy:*", "ecs:*", "iam:*", "codedeploy:*", "elasticloadbalancing:*",
+       "application-autoscaling:*" ]
     resources = ["*"]
     effect    = "Allow"
   }
@@ -76,7 +77,8 @@ EOF
 data "aws_iam_policy_document" "cicd-build-policies" {
   statement {
     sid       = ""
-    actions   = ["logs:*", "s3:*", "codebuild:*", "secretsmanager:*", "iam:*", "ecr:*", "ecr:completeLayerUpload", "ecr:InitiateLayerUpload", "ecr:PutImage", "ecr:UploadLayerPart", "codedeploy:*", "ecs:*","elasticloadbalancing:*"]
+    actions   = ["logs:*", "s3:*", "codebuild:*", "secretsmanager:*", "iam:*", "ecr:*", "ecr:completeLayerUpload", "ecr:InitiateLayerUpload", "ecr:PutImage", "ecr:UploadLayerPart", "codedeploy:*", "ecs:*","elasticloadbalancing:*", 
+       "application-autoscaling:*"]
     resources = ["*"]
     effect    = "Allow"
   }
@@ -166,7 +168,7 @@ data "aws_iam_policy_document" "ecs_service_scaling" {
       "cloudwatch:EnableAlarmActions",
       "sns:*", 
       "codedeploy:*",
-      "elasticloadbalancing:*", 
+      "elasticloadbalancing:*",
       "iam:*"
     ]
 
@@ -351,7 +353,7 @@ data "aws_iam_policy_document" "pipeline_service" {
       "sts:*",
       "codestar-connections:UseConnection", 
       "codedeploy:*",
-      "elasticloadbalancing:*",
+      "elasticloadbalancing:*"
     ]
     resources = ["*"]
     effect    = "Allow"
