@@ -16,8 +16,8 @@
       "FARGATE" 
   ]
 }],
-  "cpu": <CPU>,
-  "memory": <MEMORY>,
+  "cpu": "<CPU>",
+  "memory": "<MEMORY>",
   "networkMode": "awsvpc",
   "family": "<APP_NAME>"
 }
