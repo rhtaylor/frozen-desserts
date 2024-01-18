@@ -9,7 +9,7 @@
         {
             "hostPort": <SERVICE_PORT>,
             "protocol": "tcp",
-            "containerPort": <SERVICE_PORT>,
+            "containerPort": <SERVICE_PORT>
         }
   ],
   "requiresCompatibilities": [
