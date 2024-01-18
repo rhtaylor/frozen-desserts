@@ -61,13 +61,13 @@ jobs:
         
         - name: Terraform init, fmt, validate, apply
           run: |
-             cd rhtaylor/frozen-desserts
-             aws sts get-caller-identity
-             terraform init
-             terraform refresh
-             terraform state list
-             terrafrom destroy --auto-approve
-             
+            #  cd rhtaylor/frozen-desserts
+            #  aws sts get-caller-identity
+            #  terraform init
+            #  terraform refresh
+            #  terraform state list
+            #  terrafrom destroy --auto-approve
+
             #  terraform fmt
             #  terraform validate
             #  terraform apply --auto-approve
