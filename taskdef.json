@@ -19,4 +19,5 @@
   "memory": "<MEMORY>",
   "networkMode": "awsvpc",
   "family": "<APP_NAME>"
+} ] 
 }
