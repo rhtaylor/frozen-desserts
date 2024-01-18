@@ -14,10 +14,10 @@
   ],
   "requiresCompatibilities": [
       "FARGATE" 
-  ],
+  ]
+}],
   "cpu": <CPU>,
   "memory": <MEMORY>,
   "networkMode": "awsvpc",
   "family": "<APP_NAME>"
-} ] 
 }
