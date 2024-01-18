@@ -7,7 +7,7 @@ Rails.application.configure do
   config.hosts << /[a-z0-9-.]+\.amazonaws\.com/
   config.hosts <<  "elb.amazonaws.com"
   config.hosts << /.*\.amazonaws\.com/
-  config.hosts.clear
+  
   # Code is not reloaded between requests.
   config.cache_classes = true
 
