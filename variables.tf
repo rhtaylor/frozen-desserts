@@ -73,7 +73,7 @@ variable "port" {
   type        = number
   description = "Port Docker image exposes to traffic."
   #update to 443 for encryption
-  default = "3000"
+  default = 3000
 }
 
 variable "app_count" {
