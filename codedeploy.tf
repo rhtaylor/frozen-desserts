@@ -45,10 +45,10 @@ auto_rollback_configuration {
       }
 
      target_group {
-        name = "${aws_alb_target_group.app2.name}"
+        name = "${aws_alb_target_group.app.name}"
      }
     target_group {
-        name = "${aws_alb_target_group.app.name}"
+        name = "${aws_alb_target_group.app2.name}"
      }
      
     }
