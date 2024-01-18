@@ -8,8 +8,8 @@
       "portMappings": [
         {
             "hostPort": <SERVICE_PORT>,
+            "protocol": "tcp",
             "containerPort": <SERVICE_PORT>,
-            "protocol": "tcp"
         }
   ],
   "requiresCompatibilities": [
