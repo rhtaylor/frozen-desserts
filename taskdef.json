@@ -6,8 +6,7 @@
       "image": "<IMAGE_NAME>",
       "essential": true,
       "portMappings": [
-        {  
-          "protocol": "tcp",
+        {  "protocol": "tcp",
           "hostPort": <SERVICE_PORT> ,
           "containerPort": <SERVICE_PORT>
         }
