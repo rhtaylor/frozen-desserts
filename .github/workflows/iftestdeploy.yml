@@ -69,7 +69,7 @@ jobs:
        
         - name: Build and run test
           run: |
-            ls -la rhtaylor
+            ls -la rhtaylor/frozen-desserts
             
             # cd rhtaylor/fozen-desserts
             # bundle install
