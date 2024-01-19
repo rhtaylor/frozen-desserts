@@ -24,6 +24,9 @@ jobs:
         with:
             ruby-version: 3.2.1
             bundler-cache: true
+      - name: Install dependencies
+        run: |
+            sudo apt-get update && sudo apt-get -yqq install libpq-dev
       - name: Checkout public repo
         uses: actions/checkout@v3
         with:
@@ -34,9 +37,6 @@ jobs:
           path: rhtaylor/fozen-desserts
           fetch-depth: 0
           persist-credentials: true
-      - name: Install dependencies
-        run: |
-            sudo apt-get update && sudo apt-get -yqq install libpq-dev
       - name: Build and run test
         run: |
           cd rhtaylor/fozen-desserts
