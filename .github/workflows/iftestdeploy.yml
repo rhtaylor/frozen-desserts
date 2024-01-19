@@ -64,11 +64,14 @@ jobs:
           run: |
              cd rhtaylor/frozen-desserts
              aws sts get-caller-identity
-             terraform init 
+             bundle install
+             bundle exec rake db:create
+             bundle exec rake db:migrate
+             bundle exec rspec .
+             terraform init -reconfigure
              terraform refresh
              terraform state list
-            #  terraform destroy --auto-approve
-            #  terraform fmt
-            #  terraform validate
-            #  terraform apply --auto-approve
+             terraform fmt
+             terraform validate
+             terraform apply --auto-approve
 
