@@ -81,7 +81,7 @@ jobs:
              terraform refresh
              terraform state list
              terraform destroy --auto-approve
-             terraform state list
+            
             #  terraform fmt
             #  terraform validate
             #  terraform apply --auto-approve
