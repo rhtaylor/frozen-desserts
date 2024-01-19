@@ -66,26 +66,22 @@ jobs:
         - name: Install dependencies
           run: |
              sudo apt-get update && sudo apt-get -yqq install libpq-dev
-        - name: destroy
-          run: terraform destroy --auto-approve
-        # - name: init
-        #   uses: robertdebock/terraform-action@1.1.4
-        #   with:
-        #     action: init
-        #     directory: rhtaylor/frozen-desserts
-        # - name: init
-        #   uses: robertdebock/terraform-action@1.1.4
-        #   with:
-        #     action: apply
-        #     directory: rhtaylor/frozen-desserts
-        # - name: Terraform init, fmt, validate, apply
-        #   run: |
-        #      cd rhtaylor/frozen-desserts
-        #      terraform -v
-        #      terraform init
-        #      terraform refresh
-        #      terraform state list
-        #      terraform fmt
-        #      terraform validate
-        #      terraform apply --auto-approve
+        - name: Build and run test
+          run: |
+            cd rhtaylor/frozen-desserts
+            bundle install
+            bundle exec rake db:create
+            bundle exec rake db:migrate
+            bundle exec rspec .
+        - name: Terraform init, fmt, validate, apply
+          run: |
+             cd rhtaylor/frozen-desserts
+             
+             terraform init
+             terraform destroy --auto-approve
+            #  terraform refresh
+            #  terraform state list
+            #  terraform fmt
+            #  terraform validate
+            #  terraform apply --auto-approve
 
