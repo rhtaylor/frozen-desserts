@@ -77,7 +77,8 @@ jobs:
         - name: Terraform init, fmt, validate, apply
           run: |
              cd rhtaylor/frozen-desserts
-             terraform init -reconfigure
+             terraform -v
+             terraform init
              terraform refresh
              terraform state list
              terraform fmt
