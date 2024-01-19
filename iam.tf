@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "cicd-pipeline-policies" {
 }
 
 resource "aws_iam_policy" "cicd-pipeline-policy" {
-  name        = "tf-cicd-pipeline-policy"
+  name        = "${var.name}-cicd-pipeline-policy"
   path        = "/"
   description = "Pipeline policy"
   policy      = data.aws_iam_policy_document.cicd-pipeline-policies.json
@@ -85,7 +85,7 @@ data "aws_iam_policy_document" "cicd-build-policies" {
 }
 
 resource "aws_iam_policy" "cicd-build-policy" {
-  name        = "cicd-build-policy"
+  name        = "${var.name}-cicd-build-policy"
   path        = "/"
   description = "Codebuild policy"
   policy      = data.aws_iam_policy_document.cicd-build-policies.json
@@ -127,7 +127,7 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution_role" {
 ## AUTO SCALING ##
 
 resource "aws_iam_role" "ecs_auto_scale_role" {
-  name = "ecs-service"
+  name = "${var.name}-ecs-service"
 
   assume_role_policy = <<EOF
 {
@@ -361,7 +361,7 @@ data "aws_iam_policy_document" "pipeline_service" {
 }
 
 resource "aws_iam_policy" "pipeline" {
-  name        = "gitactions"
+  name        = "${var.name}-gitactions"
   path        = "/"
   description = "Allow service to run needed tasks."
   policy      = data.aws_iam_policy_document.pipeline_service.json
