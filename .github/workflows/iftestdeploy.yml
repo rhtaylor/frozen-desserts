@@ -39,6 +39,7 @@ jobs:
           persist-credentials: true
       - name: Build and run test
         run: |
+          ls -la
           cd rhtaylor/fozen-desserts
           bundle install
           bundle exec rake db:create
