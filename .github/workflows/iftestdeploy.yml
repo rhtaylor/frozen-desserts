@@ -67,7 +67,6 @@ jobs:
              terraform init
              terraform refresh
              terraform state list
-
              terraform destroy --auto-approve
             #  terraform fmt
             #  terraform validate
