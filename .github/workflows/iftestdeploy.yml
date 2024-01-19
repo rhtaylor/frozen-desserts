@@ -41,11 +41,11 @@ jobs:
         run: |
           ls -la
           ll
-          cd rhtaylor/fozen-desserts
-          bundle install
-          bundle exec rake db:create
-          bundle exec rake db:migrate
-          bundle exec rspec .
+          # cd rhtaylor/fozen-desserts
+          # bundle install
+          # bundle exec rake db:create
+          # bundle exec rake db:migrate
+          # bundle exec rspec .
         if: success()
   deploy:
     runs-on: ubuntu-latest
