@@ -73,14 +73,22 @@ jobs:
             bundle exec rake db:create
             bundle exec rake db:migrate
             bundle exec rspec .
-        - name: Terraform init, fmt, validate, apply
-          run: |
-             cd rhtaylor/frozen-desserts
+        - name: init
+          uses: robertdebock/terraform-action@1.1.4
+          with:
+            action: init
+            directory: rhtaylor/frozen-desserts
+        - name: apply
+          uses: robertdebock/terraform-action@1.1.4
+          with:
+            action: apply --auto-approve
+            directory: rhtaylor/frozen-desserts
+          
+        # - name: Terraform init, fmt, validate, apply
+        #   run: |
+        #      cd rhtaylor/frozen-desserts
              
-             terraform init
-             terraform state list
-             terraform destroy --auto-approve
-
+        #      terraform init
             #  terraform refresh
             #  terraform state list
             #  terraform fmt

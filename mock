@@ -1,6 +1,6 @@
-    #   uses: robertdebock/terraform-action@1.1.4
-        #   with:
-        #     action: init
-        #     directory: rhtaylor/frozen-desserts
-        # - name: init
-        #   uses: robertdebock/terraform-action@1.1.4
+      uses: robertdebock/terraform-action@1.1.4
+          with:
+            action: init
+            directory: rhtaylor/frozen-desserts
+        - name: init
+          uses: robertdebock/terraform-action@1.1.4
