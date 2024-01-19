@@ -39,13 +39,11 @@ jobs:
           persist-credentials: true
       - name: Build and run test
         run: |
-          ls -la
-          ll
-          # cd rhtaylor/fozen-desserts
-          # bundle install
-          # bundle exec rake db:create
-          # bundle exec rake db:migrate
-          # bundle exec rspec .
+          cd rhtaylor/fozen-desserts
+          bundle install
+          bundle exec rake db:create
+          bundle exec rake db:migrate
+          bundle exec rspec .
         if: success()
   deploy:
     runs-on: ubuntu-latest
@@ -71,11 +69,13 @@ jobs:
        
         - name: Build and run test
           run: |
-            cd rhtaylor/fozen-desserts
-            bundle install
-            bundle exec rake db:create
-            bundle exec rake db:migrate
-            bundle exec rspec .
+            ls -la 
+            ll
+            # cd rhtaylor/fozen-desserts
+            # bundle install
+            # bundle exec rake db:create
+            # bundle exec rake db:migrate
+            # bundle exec rspec .
         - name: Terraform init, fmt, validate, apply
           run: |
              cd rhtaylor/frozen-desserts
