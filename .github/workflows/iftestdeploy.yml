@@ -59,15 +59,25 @@ jobs:
             path: rhtaylor/frozen-desserts
             fetch-depth: 0
             persist-credentials: true 
-        
+        - name: Setup Ruby
+          uses: ruby/setup-ruby@v1
+          with:
+              ruby-version: 3.2.1
+              bundler-cache: true
+        - name: Install dependencies
+          run: |
+             sudo apt-get update && sudo apt-get -yqq install libpq-dev
+       
+        - name: Build and run test
+          run: |
+            cd rhtaylor/fozen-desserts
+            bundle install
+            bundle exec rake db:create
+            bundle exec rake db:migrate
+            bundle exec rspec .
         - name: Terraform init, fmt, validate, apply
           run: |
              cd rhtaylor/frozen-desserts
-             aws sts get-caller-identity
-             bundle install
-             bundle exec rake db:create
-             bundle exec rake db:migrate
-             bundle exec rspec .
              terraform init -reconfigure
              terraform refresh
              terraform state list
