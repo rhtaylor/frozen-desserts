@@ -63,6 +63,7 @@ jobs:
         - name: Terraform init, fmt, validate, apply
           run: |
              cd rhtaylor/frozen-desserts
+            
              aws sts get-caller-identity
              terraform init 
              terraform refresh
