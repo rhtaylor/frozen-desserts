@@ -69,13 +69,11 @@ jobs:
        
         - name: Build and run test
           run: |
-            ls -la rhtaylor/frozen-desserts
-            
-            # cd rhtaylor/fozen-desserts
-            # bundle install
-            # bundle exec rake db:create
-            # bundle exec rake db:migrate
-            # bundle exec rspec .
+            cd rhtaylor/frozen-desserts
+            bundle install
+            bundle exec rake db:create
+            bundle exec rake db:migrate
+            bundle exec rspec .
         - name: Terraform init, fmt, validate, apply
           run: |
              cd rhtaylor/frozen-desserts
