@@ -26,7 +26,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         repository: rhtaylor/frozen-desserts
-        ref: dev
+        ref: main
         token: ${{ env.GIT_TOKEN }}
         path: rhtaylor/fozen-desserts
         fetch-depth: 0
@@ -37,7 +37,6 @@ jobs:
       with:
         workspace: ${{ env.TF_WORKSPACE }}
         directory: ./rhtaylor/fozen-desserts
-
     - name: Create Apply Run
       uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
       id: apply-run
