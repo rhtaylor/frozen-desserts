@@ -5,6 +5,7 @@ env:
     TF_CLOUD_ORGANIZATION: "web_x"
     TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
     TF_WORKSPACE: "SM"
+    GIT_TOKEN: ${{ secrets.GIT_PAT_2 }}
     CONFIG_DIRECTORY: "./"
 
 on:
