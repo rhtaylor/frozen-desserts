@@ -75,16 +75,17 @@ jobs:
             # bundle exec rake db:create
             # bundle exec rake db:migrate
             # bundle exec rspec .
-        - name: init
-          uses: robertdebock/terraform-action@1.1.4
-          with:
-            action: init
-            directory: rhtaylor/frozen-desserts
-        - name: apply
-          uses: robertdebock/terraform-action@1.1.4
-          with:
-            action: apply --auto-approve
-            directory: rhtaylor/frozen-desserts
+        # - name: init
+        #   uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
+          # id: init
+          # with:
+          #   action: init
+          #   directory: rhtaylor/frozen-desserts
+        # - name: apply
+        #   uses: robertdebock/terraform-action@1.1.4
+        #   with:
+        #     action: apply --auto-approve
+        #     directory: rhtaylor/frozen-desserts
           
         # - name: Terraform init, fmt, validate, apply
         #   run: |
