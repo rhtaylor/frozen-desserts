@@ -6,7 +6,7 @@ env:
     TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
     TF_WORKSPACE: "SM"
     GIT_TOKEN: ${{ secrets.GIT_PAT_2 }}
-    CONFIG_DIRECTORY: "rhtaylor/frozen-desserts"
+    CONFIG_DIRECTORY: "./"
 
 on:
   push:
@@ -36,7 +36,8 @@ jobs:
       id: apply-upload
       with:
         workspace: ${{ env.TF_WORKSPACE }}
-        directory: ${{ env.CONFIG_DIRECTORY }}
+        directory: ./rhtaylor/fozen-desserts
+
     - name: Create Apply Run
       uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
       id: apply-run
