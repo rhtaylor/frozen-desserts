@@ -47,3 +47,4 @@ ejson/keys/*
 crash.log
 # unencrypted json
 *.tfvars.json
+.env

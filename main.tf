@@ -1,10 +1,17 @@
 terraform {
   
-  backend s3{
-    bucket = "terraform-backend-frozen-desserts"
-    key = "smfd-infra"
-    region = "us-east-2"
-  }
+  # backend s3{
+  #   bucket = "terraform-backend-frozen-desserts"
+  #   key = "smfd-infra"
+  #   region = "us-east-2"
+  # }
+   cloud {
+    organization = "web_x"
+
+    workspaces {
+      name = "SM"
+    }
+   }
 
 
   required_providers {

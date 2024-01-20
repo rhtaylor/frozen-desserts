@@ -69,7 +69,7 @@ jobs:
         - name: Build and run test
           run: |
             terraform init
-            terraform destroy --auto-approve
+            terraform state list
             # cd rhtaylor/frozen-desserts
             # bundle install
             # bundle exec rake db:create
@@ -81,11 +81,7 @@ jobs:
           # with:
           #   action: init
           #   directory: rhtaylor/frozen-desserts
-        # - name: apply
-        #   uses: robertdebock/terraform-action@1.1.4
-        #   with:
-        #     action: apply --auto-approve
-        #     directory: rhtaylor/frozen-desserts
+      
           
         # - name: Terraform init, fmt, validate, apply
         #   run: |
