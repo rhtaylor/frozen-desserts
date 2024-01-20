@@ -43,54 +43,43 @@ jobs:
           bundle install
           bundle exec rake db:create
           bundle exec rake db:migrate
-          bundle exec rspec .
         if: success()
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   steps:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
        
-  #       - name: Checkout public repo
-  #         uses: actions/checkout@v3
-  #         with:
-  #           repository: rhtaylor/frozen-desserts
-  #           ref: dev
-  #           token: ${{ env.GIT_TOKEN }}
-  #           path: rhtaylor/frozen-desserts
-  #           fetch-depth: 0
-  #           persist-credentials: true 
-  #       - name: Setup Ruby
-  #         uses: ruby/setup-ruby@v1
-  #         with:
-  #             ruby-version: 3.2.1
-  #             bundler-cache: true
-  #       - name: Install dependencies
-  #         run: |
-  #            sudo apt-get update && sudo apt-get -yqq install libpq-dev
-  #       - name: Build and run test
-  #         run: |
-  #           terraform init
-  #           terraform state list
-  #           # cd rhtaylor/frozen-desserts
-  #           # bundle install
-  #           # bundle exec rake db:create
-  #           # bundle exec rake db:migrate
-  #           # bundle exec rspec .
-        # - name: init
-        #   uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
-          # id: init
-          # with:
-          #   action: init
-          #   directory: rhtaylor/frozen-desserts
-      
+        - name: Checkout public repo
+          uses: actions/checkout@v3
+          with:
+            repository: rhtaylor/frozen-desserts
+            ref: dev
+            token: ${{ env.GIT_TOKEN }}
+            path: rhtaylor/frozen-desserts
+            fetch-depth: 0
+            persist-credentials: true 
+        - name: Setup Ruby
+          uses: ruby/setup-ruby@v1
+          with:
+              ruby-version: 3.2.1
+              bundler-cache: true
+        - name: Install dependencies
+          run: |
+             sudo apt-get update && sudo apt-get -yqq install libpq-dev
+        - name: Build and run test
+          run: |
+            terraform init -reconfigure
+            # cd rhtaylor/frozen-desserts
+            # bundle install
+            
           
         # - name: Terraform init, fmt, validate, apply
         #   run: |
         #      cd rhtaylor/frozen-desserts
              
         #      terraform init
-            #  terraform refresh
-            #  terraform state list
-            #  terraform fmt
-            #  terraform validate
-            #  terraform apply --auto-approve
+        #      terraform refresh
+        #      terraform state list
+        #      terraform fmt
+        #      terraform validate
+        #      terraform apply --auto-approve
 
