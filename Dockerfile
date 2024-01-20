@@ -17,7 +17,7 @@ RUN gem install bundler && \
     bundle install --jobs 4
 
 RUN rails db:create && \
-     rails db:migrate RAILS_ENV=production
+     rails db:migrate RAILS_ENV=development
 # Copy the application code
 COPY . .
 
