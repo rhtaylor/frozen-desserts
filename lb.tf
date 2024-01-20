@@ -66,7 +66,7 @@ resource "aws_alb_target_group" "app" {
     protocol            = "HTTP"
     matcher             = "200-499"
     timeout             = "3"
-    path                = "/health" #var.health_check_path
+    path                = ".amazonaws.com/health" #var.health_check_path
     unhealthy_threshold = "2"
   }
 }
@@ -95,7 +95,7 @@ resource "aws_alb_target_group" "app2" {
     protocol            = "HTTP"
     matcher             = "200-499"
     timeout             = "3"
-    path                = "/health" #var.health_check_path
+    path                = ".amazonaws.com/health" #var.health_check_path
     unhealthy_threshold = "2"
   }
 }
