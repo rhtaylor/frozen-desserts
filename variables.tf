@@ -123,3 +123,7 @@ variable tags {
     company = "Strong Mind"
   }
 }
+
+variable "domain" {
+  default = ""
+}
