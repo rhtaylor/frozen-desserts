@@ -44,8 +44,6 @@ jobs:
       with:
         run: ${{ steps.apply-run.outputs.run_id }}
         comment: "Apply Run from GitHub Actions CI ${{ github.sha }}"
-    - name: Destroy
-      run: terraform destroy --auto-approve
     - name: terraform destroy
       uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.0
       id: destroy
