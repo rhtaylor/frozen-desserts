@@ -28,7 +28,6 @@ jobs:
         repository: rhtaylor/frozen-desserts
         ref: main
         token: ${{ env.GIT_TOKEN }}
-        path: ./rhtaylor/fozen-desserts
         fetch-depth: 0
         persist-credentials: true
     - name: Upload Configuration
