@@ -35,7 +35,7 @@ jobs:
       id: apply-upload
       with:
         workspace: ${{ env.TF_WORKSPACE }}
-        directory: ./rhtaylor/fozen-desserts
+        directory: ./
     - name: Create Apply Run
       uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
       id: apply-run
