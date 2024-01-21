@@ -37,7 +37,7 @@ jobs:
       with:
         workspace: ${{ env.TF_WORKSPACE }}
         directory: ./rhtaylor/fozen-desserts
-    - name: Apply
+    - name: apply
       uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.0
       if: fromJSON(steps.apply-run.outputs.payload).data.attributes.actions.IsConfirmable
       id: apply
