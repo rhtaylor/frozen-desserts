@@ -13,13 +13,13 @@ resource "aws_security_group" "lb" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    protocol    = "tcp"
+    protocol    = "TCP"
     from_port   = 3000
     to_port     = 3000
     cidr_blocks = ["0.0.0.0/0"]
   }
    ingress {
-    protocol    = "tcp"
+    protocol    = "TCP"
     from_port   = 80
     to_port     = 80
     cidr_blocks = ["0.0.0.0/0"]
@@ -39,7 +39,7 @@ resource "aws_security_group" "ecs_tasks" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    protocol        = "tcp"
+    protocol        = "TCP"
     from_port       = 3000
     to_port         = 3000
     security_groups = [aws_security_group.lb.id]
@@ -56,7 +56,7 @@ resource "aws_security_group" "ecs_tasks" {
 resource "aws_alb_target_group" "app" {
   name        = "${var.name}-target-group-app"
   port        = 80
-  protocol    = "tcp"
+  protocol    = "TCP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
 
@@ -66,7 +66,7 @@ resource "aws_alb_target_group" "app" {
 resource "aws_alb_listener" "front_end" {
   load_balancer_arn = aws_alb.main.id
   port              = 80
-  protocol          = "tcp"
+  protocol          = "TCP"
 
   default_action {
     target_group_arn = aws_alb_target_group.app.id
@@ -77,7 +77,7 @@ resource "aws_alb_listener" "front_end" {
 resource "aws_alb_target_group" "app2" {
   name        = "${var.name}-target-group-app2"
   port        = 3000
-  protocol    = "tcp"
+  protocol    = "TCP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
 #   health_check {
@@ -94,7 +94,7 @@ resource "aws_alb_target_group" "app2" {
 resource "aws_alb_listener" "front_end2" {
   load_balancer_arn = aws_alb.main.id
   port              = 3000
-  protocol          = "tcp"
+  protocol          = "TCP"
 
   default_action {
     target_group_arn = aws_alb_target_group.app2.id
