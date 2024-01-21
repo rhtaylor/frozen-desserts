@@ -28,7 +28,7 @@ jobs:
         repository: rhtaylor/frozen-desserts
         ref: main
         token: ${{ env.GIT_TOKEN }}
-        path: rhtaylor/fozen-desserts
+        path: ./rhtaylor/fozen-desserts
         fetch-depth: 0
         persist-credentials: true
     - name: Upload Configuration
@@ -37,7 +37,7 @@ jobs:
       with:
         workspace: ${{ env.TF_WORKSPACE }}
         directory: ./rhtaylor/fozen-desserts
-    - name: apply
+    - name: Apply
       uses: hashicorp/tfc-workflows-github/actions/apply-run@v1.0.0
       if: fromJSON(steps.apply-run.outputs.payload).data.attributes.actions.IsConfirmable
       id: apply
