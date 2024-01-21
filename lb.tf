@@ -19,7 +19,7 @@ resource "aws_security_group" "lb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
    ingress {
-    protocol    = "TCP"
+    protocol    = "HTTP"
     from_port   = 80
     to_port     = 80
     cidr_blocks = ["0.0.0.0/0"]
