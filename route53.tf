@@ -39,7 +39,7 @@ resource "aws_cloudfront_distribution" "cf_dist" {
     allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
     cached_methods         = ["GET", "HEAD", "OPTIONS"]
     target_origin_id       = aws_alb.main.dns_name
-    viewer_protocol_policy = "redirect-to-http"
+    viewer_protocol_policy = "allow-all"
     forwarded_values {
       headers      = []
       query_string = true
