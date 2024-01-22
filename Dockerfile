@@ -18,6 +18,7 @@ RUN gem install bundler && \
 
 RUN rails db:create
 RUN rails db:migrate RAILS_ENV=production
+RUN rails db:seed
 # Copy the application code
 COPY . .
 
