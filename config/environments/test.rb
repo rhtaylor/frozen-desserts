@@ -7,9 +7,8 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.hosts << ".amazonaws.com"
-  config.hosts << /.*\.amazonaws\.com/
-  config.hosts = [".amazonaws.com", IPAddr.new("0.0.0.0/0")]
+  config.hosts << "webmasterssolutions.co"
+ 
   # Turn false under Spring and add config.action_view.cache_template_loading = true.
   config.cache_classes = true
 

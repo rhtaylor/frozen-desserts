@@ -8,10 +8,8 @@ Rails.application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
   
-  config.hosts << /[a-z0-9-.]+\.amazonaws\.com/
-  config.hosts <<  "elb.amazonaws.com"
-  config.hosts << /.*\.amazonaws\.com/
-  config.hosts = [".amazonaws.com", IPAddr.new("0.0.0.0/0")]
+  config.hosts << "webmasterssolutions.co"
+ 
   # config.host_authorization = { exclude: ->(request) { request.path =~ /healthcheck/ } }
   # config.host_authorization = { exclude: ->(request) { request.path =~ / } }
 
