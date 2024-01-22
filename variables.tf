@@ -124,6 +124,6 @@ variable tags {
   }
 }
 
-# variable "domain" {
-#   default = ""
-# }
+variable "domain" {
+  default = "example.com"
+}
