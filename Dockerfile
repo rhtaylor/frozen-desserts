@@ -16,7 +16,7 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && \
     bundle install --jobs 4
 
-RUN rake db:create
+RUN bin/rake db:create
 RUN rake db:migrate RAILS_ENV=production
 # Copy the application code
 COPY . .
