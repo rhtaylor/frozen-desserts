@@ -16,8 +16,8 @@ COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && \
     bundle install --jobs 4
 
-RUN rails db:create && \
-     rails db:migrate RAILS_ENV=production
+RUN rails db:create
+RUN rails db:migrate RAILS_ENV=production
 # Copy the application code
 COPY . .
 
