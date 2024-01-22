@@ -7,6 +7,20 @@ phases:
       nodejs: 16
   pre_build:
     commands:
+    - apt-get update
+    - apt-get install git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev
+    - apt install ruby-full
+    - apt update
+    - apt install git curl autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev libdb-dev
+    - curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
+    - echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+    - echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+    - source ~/.bashrc
+    - rbenv install 3.2.1
+    - apt update
+    - apt install curl g++ gcc autoconf automake bison libc6-dev libffi-dev libgdbm-dev libncurses5-dev libsqlite3-dev libtool libyaml-dev make pkg-config sqlite3 zlib1g-dev libgmp-dev libreadline-dev libssl-dev
+    - gem install bundler
+    - gem install rails 7
     - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
     - export DOCKER_BUILDKIT=1
     - export BUILDKIT_PROGRESS=plain
