@@ -125,5 +125,5 @@ variable tags {
 }
 
 variable "domain" {
-  default = "example.com"
+  default = "webmasterssolutions.co"
 }
