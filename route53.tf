@@ -26,8 +26,8 @@ resource "aws_cloudfront_distribution" "cf_dist" {
   enabled             = true
   aliases             = [var.domain]
   origin {
-    domain_name = aws_lb.main.dns_name
-    origin_id   = aws_lb.main.dns_name
+    domain_name = aws_alb.main.dns_name
+    origin_id   = aws_alb.main.dns_name
     custom_origin_config {
       http_port              = 80
       https_port             = 80
@@ -38,7 +38,7 @@ resource "aws_cloudfront_distribution" "cf_dist" {
   default_cache_behavior {
     allowed_methods        = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
     cached_methods         = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id       = aws_lb.main.dns_name
+    target_origin_id       = aws_alb.main.dns_name
     viewer_protocol_policy = "redirect-to-http"
     forwarded_values {
       headers      = []
