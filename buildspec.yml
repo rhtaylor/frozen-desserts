@@ -21,6 +21,7 @@ phases:
     - apt install curl g++ gcc autoconf automake bison libc6-dev libffi-dev libgdbm-dev libncurses5-dev libsqlite3-dev libtool libyaml-dev make pkg-config sqlite3 zlib1g-dev libgmp-dev libreadline-dev libssl-dev
     - gem install bundler
     - gem install rails 7
+    - echo rails -v
     - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
     - export DOCKER_BUILDKIT=1
     - export BUILDKIT_PROGRESS=plain
