@@ -1,5 +1,6 @@
 
 #!/bin/bash
+gem: command not found
 gem install bundler
 
 ENV=production
