@@ -1,6 +1,6 @@
 
 #!/bin/bash
-sudo apt-get install rubygems
+aptitude install libgemplugin-ruby
 gem install bundler
 
 ENV=production
