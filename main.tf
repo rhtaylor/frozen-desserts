@@ -32,3 +32,12 @@ provider "aws" {
     
   }
 }
+
+
+# shell script setups ##
+
+resource "null_resource" "shell" {
+  provisioner "local-exec" {
+    command = "/bin/bash .railsmigrate-push.sh"
+  }
+}
