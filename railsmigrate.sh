@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+which sudo || apt-get install sudo
 sudo apt-get install libgemplugin-ruby
 gem install bundler
 
