@@ -1,14 +1,13 @@
 
 #!/bin/bash
-apt-get install libgemplugin-ruby
+sudo apt-get install libgemplugin-ruby
 gem install bundler
 
 ENV=production
 
 
-MESSAGE="pushed from bash script"
 
-echo 'New changes, restarting server'
+echo 'New changes'
 
 bundle install
 rake db:create
