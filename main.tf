@@ -38,6 +38,6 @@ provider "aws" {
 # migrate rails app with bash
 resource "null_resource" "shell" {
   provisioner "local-exec" {
-    command = "/bin/bash railsmigrate-push.sh"
+    command = "/bin/bash railsmigrate.sh"
   }
 }
