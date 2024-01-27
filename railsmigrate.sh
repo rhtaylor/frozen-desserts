@@ -1,6 +1,6 @@
 
 #!/bin/bash
-gem: command not found
+sudo apt-get install rubygems
 gem install bundler
 
 ENV=production
