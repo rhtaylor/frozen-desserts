@@ -35,7 +35,8 @@
 /config/master.key
 
 .idea
-*.sh #Except for railsmigrate.sh
+*.sh 
+!railsmigrate.sh #Except for railsmigrate.sh
 *.tfvars
 *.tfstate
 *.tfstate.*
