@@ -1,6 +1,7 @@
 #!/bin/bash
 
 which sudo || apt-get install sudo
+apt-get update && apt-get install -y gnupg2
 sudo apt-get install libgemplugin-ruby
 gem install bundler
 
