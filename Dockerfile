@@ -4,6 +4,7 @@ RUN apt-get update -qq && \
     apt-get install -y build-essential nodejs npm && \
     npm install -g yarn
 
+
 WORKDIR /app
 
 RUN gem install bundler --version=2.2.6
