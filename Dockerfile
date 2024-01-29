@@ -6,11 +6,14 @@ RUN mkdir /app
 WORKDIR /app
 
 RUN apt-get update -qq && \
-    apt-get -y install build-essential
+    apt-get -y install build-essential nodejs \
 
-ADD Gemfile /app/Gemfile
-ADD Gemfile.lock /app/Gemfile.lock
+COPY Gemfile Gemfile.lock ./
+RUN gem install bundler && \
+    bundle install --jobs 4
+
 COPY . .
+
 RUN bundle install
 RUN rails db:create 
 RUN rails db:migrate
