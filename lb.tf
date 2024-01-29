@@ -65,7 +65,7 @@ resource "aws_alb_target_group" "app" {
 
 resource "aws_alb_listener" "front_end" {
   load_balancer_arn = aws_alb.main.id
-  port              = 80
+  port              = 443
   protocol          = "HTTP"
 
   default_action {
