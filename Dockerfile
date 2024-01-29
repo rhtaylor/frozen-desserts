@@ -6,7 +6,7 @@ RUN mkdir /app
 WORKDIR /app
 
 RUN apt-get update -qq && \
-    apt-get -y install build-essential nodejs \
+    apt-get -y install build-essential 
 
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler && \
