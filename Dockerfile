@@ -1,21 +1,9 @@
-FROM ruby:3.2.1 
-
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-RUN apt-get update && apt-get install -y nodejs sqlite3 && rm -rf /var/lib/apt/lists/*
-
-ENV RAILS_ENV production
-ENV RAILS_SERVE_STATIC_FILES true
-ENV RAILS_LOG_TO_STDOUT true
-
-COPY Gemfile /usr/src/app/
-COPY Gemfile.lock /usr/src/app/
-RUN bundle config --global frozen 1
-RUN bundle install --without development test
-
-COPY . /usr/src/app
-RUN bundle exec rake DATABASE_URL=postgresql:does_not_exist assets:precompile
-RUN rails db:migrate && rails db:migrate
-EXPOSE 3000
-CMD ['rails', 'server', '-b', '0.0.0.0']
+  FROM ruby:3.2.1
+  RUN apt-get update && apt-get install -y nodejs
+  WORKDIR /app
+  COPY Gemfile* .
+  RUN bundle install
+  RUN rails db:create
+  COPY . .
+  EXPOSE 3000
+  CMD ["rails", "server", "-b", "0.0.0.0"]
