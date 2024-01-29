@@ -1,23 +1,29 @@
-# example-rails-app/Dockerfile
-
+# Use the official Ruby image with version 3.2.2 as the base image
 FROM ruby:3.2.1
 
-RUN mkdir /app
+# Set an environment variable for Rails to run in production mode
+ENV RAILS_ENV production
+
+# Install essential dependencies
+RUN apt-get update -qq && apt-get install -y nodejs npm
+
+# Set up the working directory in the container
 WORKDIR /app
 
-RUN apt-get update -qq && \
-    apt-get -y install build-essential 
-
+# Install Rails dependencies first to leverage Docker cache
 COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && \
-    bundle install --jobs 4
+RUN gem install bundler && bundle install --jobs 4
 
+# Copy the rest of the application's code to the container
 COPY . .
 
-RUN bundle install
-RUN rails db:create 
+# Precompile assets
+RUN bundle exec rake assets:precompile
+RUN rails db:create
 RUN rails db:migrate
+# Expose the port your Rails app will listen on (assuming it's 3000)
+EXPOSE 3000
+EXPOSE $PORT
 
-COPY . .
-
-CMD [ "bundle", "exec", "rails", "s", "-b", "0.0.0.0" ]
+# Start the Rails server when the container is run
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "$PORT"]
