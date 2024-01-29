@@ -3,7 +3,11 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   req = ActionDispatch::Request.new
-  
+  config.web_console.whitelisted_ips = ['0.0.0.0/0', '::/0']
+
+  # Allow access from any hostname
+  config.hosts.clear
+
   config.hosts << "webmasterssolutions.co"
 
   # Code is not reloaded between requests.

@@ -1,25 +1,19 @@
+# example-rails-app/Dockerfile
+
 FROM ruby:3.2.1
 
-RUN apt-get update -qq && \
-    apt-get install -y build-essential nodejs npm && \
-    npm install -g yarn
-
-
+RUN mkdir /app
 WORKDIR /app
 
-RUN gem install bundler --version=2.2.6
+RUN apt-get update -qq && \
+    apt-get -y install build-essential
 
-COPY Gemfile Gemfile.lock ./
-COPY yarn.lock ./
+ADD Gemfile /app/Gemfile
+ADD Gemfile.lock /app/Gemfile.lock
 
-RUN yarn install --check-files
-RUN bundle lock --add-platform x86_64-linux && bundle install
-
+RUN bundle install
+RUN rails db:create 
+RUN rails db:migrate RAILS_ENV=production
 COPY . .
 
-RUN bundle exec rake assets:precompile
-
-RUN rails db:create && rails rake db:migrate RAILS_ENV=production
-# RUN rails db:migrate RAILS_ENV=production 
-
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD [ "bundle", "exec", "rails", "s", "-b", "0.0.0.0" ]
