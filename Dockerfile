@@ -18,7 +18,7 @@ COPY . .
 
 RUN bundle exec rake assets:precompile
 
-RUN rails db:create
-RUN rails db:migrate RAILS_ENV=production 
+RUN bundle exec rake db:create && bundle exec rake db:migrate RAILS_ENV=production
+# RUN rails db:migrate RAILS_ENV=production 
 
 CMD ["rails", "server", "-b", "0.0.0.0"]
