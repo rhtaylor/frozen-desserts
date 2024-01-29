@@ -7,7 +7,6 @@ phases:
       nodejs: 16
   pre_build:
     commands:
-    
     - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URI
     - export DOCKER_BUILDKIT=1
     - export BUILDKIT_PROGRESS=plain
