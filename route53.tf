@@ -63,20 +63,8 @@ resource "aws_cloudfront_distribution" "cf_dist" {
 }
 
 
-data "aws_acm_certificate" "issued" {
-  domain   = "webmasterssolutions.co"
-  statuses = ["ISSUED"]
-}
+resource "aws_acm_certificate" "cert" {
+  domain_name       = "webmasterssolutions.co"
+  validation_method = "DSN"
 
-# Find a certificate issued by (not imported into) ACM
-data "aws_acm_certificate" "amazon_issued" {
-  domain      = "webmasterssolutions.co"
-  types       = ["AMAZON_ISSUED"]
-  most_recent = true
-}
-
-# Find a RSA 4096 bit certificate
-data "aws_acm_certificate" "rsa_4096" {
-  domain    = "webmasterssolutions.co"
-  key_types = ["RSA_4096"]
 }
