@@ -8,6 +8,7 @@ resource "aws_route53_record" "domain_name" {
   
   name    = var.domain
   type    = "A"
+  
   alias {
     name                   = aws_alb.main.dns_name
     zone_id                = aws_alb.main.zone_id
