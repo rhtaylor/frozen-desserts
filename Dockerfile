@@ -7,6 +7,8 @@ FROM ruby:$RUBY_VERSION-slim as base
 # Rails app lives here
 WORKDIR /rails
 
+
+
 # Set production environment
 ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development:test" \
