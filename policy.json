@@ -39,7 +39,7 @@
         {
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:logs:us-east-1:ACCOUNT_ID:log-group:*"
+                "arn:aws:logs:us-east-2:ACCOUNT_ID:log-group:*"
             ],
             "Action": [
                 "logs:CreateLogGroup",
@@ -70,7 +70,7 @@
                 "codebuild:BatchPutCodeCoverages"
             ],
             "Resource": [
-                "arn:aws:codebuild:us-east-1:ACCOUNT_ID:report-group/CODEBUILD_NAME*"
+                "arn:aws:codebuild:us-east-2:ACCOUNT_ID:report-group/CODEBUILD_NAME*"
             ]
         }
     ]
