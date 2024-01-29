@@ -3,6 +3,7 @@
   WORKDIR /app
   RUN gem install rails bundler
   COPY Gemfile* .
+  COPY . .
   RUN bundle install
   RUN rails db:create
   RUN rails db:migrate
