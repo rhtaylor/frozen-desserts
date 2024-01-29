@@ -56,8 +56,27 @@ resource "aws_cloudfront_distribution" "cf_dist" {
   }
  
   viewer_certificate {
-    # acm_certificate_arn      = aws_acm_certificate.cert.arn
+    acm_certificate_arn      = aws_acm_certificate.cert.arn
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.2_2018"
   }
+}
+
+
+data "aws_acm_certificate" "issued" {
+  domain   = "webmasterssolutions.co"
+  statuses = ["ISSUED"]
+}
+
+# Find a certificate issued by (not imported into) ACM
+data "aws_acm_certificate" "amazon_issued" {
+  domain      = "webmasterssolutions.co"
+  types       = ["AMAZON_ISSUED"]
+  most_recent = true
+}
+
+# Find a RSA 4096 bit certificate
+data "aws_acm_certificate" "rsa_4096" {
+  domain    = "webmasterssolutions.co"
+  key_types = ["RSA_4096"]
 }
