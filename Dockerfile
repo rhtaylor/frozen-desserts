@@ -9,7 +9,7 @@ WORKDIR /app
 RUN gem install bundler --version=2.2.6
 
 COPY Gemfile Gemfile.lock ./
-COPY package.json yarn.lock ./
+COPY yarn.lock ./
 
 RUN yarn install --check-files
 RUN bundle lock --add-platform x86_64-linux && bundle install
