@@ -5,8 +5,8 @@
   COPY Gemfile* .
   COPY . .
   RUN bundle install
-  RUN rails db:create
-  RUN rails db:migrate
-  COPY . .
+  RUN rails db:create && rails db:migrate
+ 
+  
   EXPOSE 3000
   CMD ["rails", "server", "-b", "0.0.0.0"]
