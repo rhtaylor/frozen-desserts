@@ -1,29 +1,21 @@
-# Use the official Ruby image with version 3.2.2 as the base image
-FROM ruby:3.2.1
+FROM ruby:2.3
 
-# Set an environment variable for Rails to run in production mode
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y nodejs mysql-client postgresql-client sqlite3 vim --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
 ENV RAILS_ENV production
+ENV RAILS_SERVE_STATIC_FILES true
+ENV RAILS_LOG_TO_STDOUT true
 
-# Install essential dependencies
-RUN apt-get update -qq && apt-get install -y nodejs npm
+COPY Gemfile /usr/src/app/
+COPY Gemfile.lock /usr/src/app/
+RUN bundle config --global frozen 1
+RUN bundle install --without development test
 
-# Set up the working directory in the container
-WORKDIR /app
-
-# Install Rails dependencies first to leverage Docker cache
-COPY Gemfile Gemfile.lock ./
-RUN gem install bundler && bundle install --jobs 4
-
-# Copy the rest of the application's code to the container
-COPY . .
-
-# Precompile assets
-RUN bundle exec rake assets:precompile
-RUN rails db:create
-RUN rails db:migrate
-# Expose the port your Rails app will listen on (assuming it's 3000)
+COPY . /usr/src/app
+RUN bundle exec rake DATABASE_URL=postgresql:does_not_exist assets:precompile
+RUN rails db:migrate && rails db:migrate
 EXPOSE 3000
-EXPOSE $PORT
-
-# Start the Rails server when the container is run
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0", "-p", "$PORT"]
+CMD ['rails', 'server', '-b', '0.0.0.0']
