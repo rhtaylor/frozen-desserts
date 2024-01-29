@@ -13,7 +13,7 @@ ADD Gemfile.lock /app/Gemfile.lock
 COPY . .
 RUN bundle install
 RUN rails db:create 
-RUN bundle exec rake db:migrate RAILS_ENV=production
+RUN rails RAILS_ENV=production db:migrate
 
 COPY . .
 
