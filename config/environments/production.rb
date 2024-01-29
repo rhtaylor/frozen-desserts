@@ -7,7 +7,7 @@ Rails.application.configure do
 
   # Allow access from any hostname
   config.hosts.clear
-
+  config.hosts << "load-balancer-1129315180.us-east-2.elb.amazonaws.com"
   config.hosts << "webmasterssolutions.co"
 
   # Code is not reloaded between requests.

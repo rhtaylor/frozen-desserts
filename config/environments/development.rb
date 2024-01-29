@@ -9,7 +9,7 @@ Rails.application.configure do
   config.cache_classes = false
   
   config.hosts << "webmasterssolutions.co"
- 
+  config.hosts << "load-balancer-1129315180.us-east-2.elb.amazonaws.com"
   # config.host_authorization = { exclude: ->(request) { request.path =~ /healthcheck/ } }
   # config.host_authorization = { exclude: ->(request) { request.path =~ / } }
 
