@@ -10,7 +10,7 @@ RUN apt-get update -qq && \
 
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
-
+COPY . .
 RUN bundle install
 RUN rails db:create 
 RUN rails db:migrate RAILS_ENV=production
