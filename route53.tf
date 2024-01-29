@@ -65,6 +65,6 @@ resource "aws_cloudfront_distribution" "cf_dist" {
 
 resource "aws_acm_certificate" "cert" {
   domain_name       = "webmasterssolutions.co"
-  validation_method = "DSN"
+  validation_method = "DNS"
 
 }
